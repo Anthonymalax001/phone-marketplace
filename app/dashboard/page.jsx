@@ -13,6 +13,7 @@ export default function Dashboard() {
   const [products, setProducts] = useState([])
   const [orders, setOrders] = useState([])
   const [tradeIns, setTradeIns] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const [userEmail, setUserEmail] =
     useState('')
@@ -40,9 +41,13 @@ export default function Dashboard() {
 
     setUserEmail(session.user.email)
 
-    fetchProducts()
-    fetchOrders()
-    fetchTradeIns()
+    await Promise.all([
+      fetchProducts(),
+      fetchOrders(),
+      fetchTradeIns(),
+    ])
+
+    setLoading(false)
   }
 
   const fetchProducts = async () => {
@@ -52,7 +57,7 @@ export default function Dashboard() {
       .select('*')
       .order('id', { ascending: false })
 
-    if (!error) {
+    if (!error && data) {
       setProducts(data)
     }
   }
@@ -63,7 +68,7 @@ export default function Dashboard() {
       .from('orders')
       .select('*')
 
-    if (!error) {
+    if (!error && data) {
       setOrders(data)
     }
   }
@@ -74,7 +79,7 @@ export default function Dashboard() {
       .from('trade_ins')
       .select('*')
 
-    if (!error) {
+    if (!error && data) {
       setTradeIns(data)
     }
   }
@@ -86,30 +91,30 @@ export default function Dashboard() {
   )
 
   return (
-    <main className="min-h-screen bg-gray-100 p-4 md:p-10">
+    <main className="min-h-screen bg-gray-100 px-4 py-6 sm:px-6 lg:px-10">
 
       <div className="max-w-7xl mx-auto">
 
         {/* HEADER */}
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+        <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-6">
 
           <div>
 
-            <h1 className="text-5xl font-bold">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
               Dealer Dashboard
             </h1>
 
-            <p className="mt-4 text-gray-600 text-xl">
+            <p className="mt-3 text-gray-600 text-base sm:text-lg lg:text-xl">
               Welcome to your marketplace control center.
             </p>
 
           </div>
 
-          <div className="flex gap-4 flex-wrap items-center">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 flex-wrap">
 
             <Link href="/dashboard/add-product">
 
-              <button className="bg-black text-white px-6 py-4 rounded-2xl hover:bg-gray-800 transition">
+              <button className="w-full sm:w-auto bg-black text-white px-6 py-4 rounded-2xl hover:bg-gray-800 transition font-semibold">
                 Add Product
               </button>
 
@@ -119,7 +124,7 @@ export default function Dashboard() {
 
               <Link href="/admin">
 
-                <button className="border border-black px-6 py-4 rounded-2xl hover:bg-black hover:text-white transition">
+                <button className="w-full sm:w-auto border border-black px-6 py-4 rounded-2xl hover:bg-black hover:text-white transition font-semibold">
                   Admin Panel
                 </button>
 
@@ -127,26 +132,28 @@ export default function Dashboard() {
 
             )}
 
-            <LogoutButton />
+            <div className="w-full sm:w-auto">
+              <LogoutButton />
+            </div>
 
           </div>
 
         </div>
 
         {/* STATS */}
-        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6 mt-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mt-10">
 
           <div className="bg-white p-6 rounded-3xl shadow-sm">
 
-            <h2 className="text-2xl font-bold">
+            <h2 className="text-xl sm:text-2xl font-bold">
               Products
             </h2>
 
-            <p className="text-5xl font-bold mt-4">
+            <p className="text-4xl sm:text-5xl font-bold mt-4">
               {products.length}
             </p>
 
-            <p className="mt-3 text-gray-600">
+            <p className="mt-3 text-gray-600 text-sm sm:text-base">
               Total listings uploaded
             </p>
 
@@ -154,15 +161,15 @@ export default function Dashboard() {
 
           <div className="bg-white p-6 rounded-3xl shadow-sm">
 
-            <h2 className="text-2xl font-bold">
+            <h2 className="text-xl sm:text-2xl font-bold">
               Orders
             </h2>
 
-            <p className="text-5xl font-bold mt-4">
+            <p className="text-4xl sm:text-5xl font-bold mt-4">
               {orders.length}
             </p>
 
-            <p className="mt-3 text-gray-600">
+            <p className="mt-3 text-gray-600 text-sm sm:text-base">
               Customer purchases
             </p>
 
@@ -170,15 +177,15 @@ export default function Dashboard() {
 
           <div className="bg-white p-6 rounded-3xl shadow-sm">
 
-            <h2 className="text-2xl font-bold">
+            <h2 className="text-xl sm:text-2xl font-bold">
               Trade-Ins
             </h2>
 
-            <p className="text-5xl font-bold mt-4">
+            <p className="text-4xl sm:text-5xl font-bold mt-4">
               {tradeIns.length}
             </p>
 
-            <p className="mt-3 text-gray-600">
+            <p className="mt-3 text-gray-600 text-sm sm:text-base">
               Exchange requests
             </p>
 
@@ -186,15 +193,15 @@ export default function Dashboard() {
 
           <div className="bg-white p-6 rounded-3xl shadow-sm">
 
-            <h2 className="text-2xl font-bold">
+            <h2 className="text-xl sm:text-2xl font-bold">
               Revenue
             </h2>
 
-            <p className="text-4xl font-bold mt-4">
+            <p className="text-3xl sm:text-4xl font-bold mt-4 break-words">
               KES {totalRevenue}
             </p>
 
-            <p className="mt-3 text-gray-600">
+            <p className="mt-3 text-gray-600 text-sm sm:text-base">
               Marketplace earnings
             </p>
 
@@ -203,19 +210,19 @@ export default function Dashboard() {
         </div>
 
         {/* QUICK ACTIONS */}
-        <div className="bg-white rounded-3xl p-6 mt-10 shadow-sm">
+        <div className="bg-white rounded-3xl p-5 sm:p-6 mt-10 shadow-sm">
 
-          <h2 className="text-3xl font-bold">
+          <h2 className="text-2xl sm:text-3xl font-bold">
             Quick Actions
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-5 mt-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-6">
 
             <Link href="/dashboard/add-product">
 
               <div className="border rounded-3xl p-6 hover:bg-gray-50 transition cursor-pointer">
 
-                <h3 className="text-2xl font-bold">
+                <h3 className="text-xl sm:text-2xl font-bold">
                   Add Product
                 </h3>
 
@@ -231,7 +238,7 @@ export default function Dashboard() {
 
               <div className="border rounded-3xl p-6 hover:bg-gray-50 transition cursor-pointer">
 
-                <h3 className="text-2xl font-bold">
+                <h3 className="text-xl sm:text-2xl font-bold">
                   Trade-Ins
                 </h3>
 
@@ -247,7 +254,7 @@ export default function Dashboard() {
 
               <div className="border rounded-3xl p-6 hover:bg-gray-50 transition cursor-pointer">
 
-                <h3 className="text-2xl font-bold">
+                <h3 className="text-xl sm:text-2xl font-bold">
                   Orders
                 </h3>
 
@@ -264,13 +271,13 @@ export default function Dashboard() {
         </div>
 
         {/* RECENT PRODUCTS */}
-        <div className="bg-white rounded-3xl p-6 mt-10 shadow-sm overflow-x-auto">
+        <div className="bg-white rounded-3xl p-5 sm:p-6 mt-10 shadow-sm">
 
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
 
             <div>
 
-              <h2 className="text-3xl font-bold">
+              <h2 className="text-2xl sm:text-3xl font-bold">
                 Recent Products
               </h2>
 
@@ -282,7 +289,17 @@ export default function Dashboard() {
 
           </div>
 
-          {products.length === 0 ? (
+          {loading ? (
+
+            <div className="py-16 text-center">
+
+              <h2 className="text-2xl font-bold">
+                Loading Dashboard...
+              </h2>
+
+            </div>
+
+          ) : products.length === 0 ? (
 
             <p className="text-gray-500">
               No products uploaded yet.
@@ -290,94 +307,74 @@ export default function Dashboard() {
 
           ) : (
 
-            <table className="w-full min-w-[900px]">
+            <div className="space-y-5">
 
-              <thead>
+              {products.slice(0, 5).map((product) => (
 
-                <tr className="border-b text-left">
+                <div
+                  key={product.id}
+                  className="border rounded-3xl p-4 sm:p-5"
+                >
 
-                  <th className="pb-5">
-                    Product
-                  </th>
+                  <div className="flex flex-col sm:flex-row gap-5">
 
-                  <th className="pb-5">
-                    Price
-                  </th>
+                    <img
+                      src={product.image_url}
+                      alt={product.name}
+                      className="w-full sm:w-28 h-56 sm:h-28 rounded-2xl object-cover"
+                    />
 
-                  <th className="pb-5">
-                    Storage
-                  </th>
+                    <div className="flex-1">
 
-                  <th className="pb-5">
-                    Condition
-                  </th>
-
-                  <th className="pb-5">
-                    Dealer
-                  </th>
-
-                </tr>
-
-              </thead>
-
-              <tbody>
-
-                {products.slice(0, 5).map((product) => (
-
-                  <tr
-                    key={product.id}
-                    className="border-b"
-                  >
-
-                    <td className="py-5">
-
-                      <div className="flex items-center gap-4">
-
-                        <img
-                          src={product.image_url}
-                          alt={product.name}
-                          className="w-16 h-16 rounded-2xl object-cover"
-                        />
+                      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
 
                         <div>
 
-                          <h3 className="font-bold">
+                          <h3 className="text-xl sm:text-2xl font-bold">
                             {product.name}
                           </h3>
 
-                          <p className="text-gray-500 text-sm mt-1">
+                          <p className="text-gray-500 mt-1">
                             {product.ram}
+                          </p>
+
+                        </div>
+
+                        <div className="text-left lg:text-right">
+
+                          <p className="text-2xl font-bold">
+                            KES {product.price}
+                          </p>
+
+                          <p className="text-gray-500 mt-1 capitalize">
+                            {product.condition}
                           </p>
 
                         </div>
 
                       </div>
 
-                    </td>
+                      <div className="flex flex-wrap gap-3 mt-5">
 
-                    <td className="py-5 font-bold">
-                      KES {product.price}
-                    </td>
+                        <div className="bg-gray-100 px-4 py-2 rounded-full text-sm">
+                          {product.storage}
+                        </div>
 
-                    <td className="py-5">
-                      {product.storage}
-                    </td>
+                        <div className="bg-gray-100 px-4 py-2 rounded-full text-sm">
+                          {product.seller_name}
+                        </div>
 
-                    <td className="py-5 capitalize">
-                      {product.condition}
-                    </td>
+                      </div>
 
-                    <td className="py-5">
-                      {product.seller_name}
-                    </td>
+                    </div>
 
-                  </tr>
+                  </div>
 
-                ))}
+                </div>
 
-              </tbody>
+              ))}
 
-            </table>
+            </div>
 
           )}
 

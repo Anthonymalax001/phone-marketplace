@@ -1,9 +1,11 @@
 'use client'
 
 import Link from 'next/link'
+
 import {
   ShoppingCart,
-  Repeat
+  Repeat,
+  Search
 } from 'lucide-react'
 
 import {
@@ -45,21 +47,108 @@ export default function Navbar() {
   }, [])
 
   return (
-    <nav className="bg-white border-b sticky top-0 z-50">
 
-      <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex items-center justify-between gap-4">
+    <nav className="bg-white border-b sticky top-0 z-50 backdrop-blur-lg">
 
-        {/* LOGO */}
-        <Link href="/">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
 
-          <h1 className="text-2xl md:text-3xl font-bold cursor-pointer">
-            PhoneHub
-          </h1>
+        {/* TOP NAV */}
+        <div className="flex items-center justify-between gap-4">
 
-        </Link>
+          {/* LOGO */}
+          <Link href="/">
 
-        {/* SEARCH */}
-        <div className="flex-1 hidden md:block">
+            <h1 className="text-2xl sm:text-3xl font-bold cursor-pointer whitespace-nowrap">
+              PhoneHub
+            </h1>
+
+          </Link>
+
+          {/* DESKTOP SEARCH */}
+          <div className="flex-1 hidden lg:block">
+
+            <form
+              action="/search"
+              method="GET"
+              className="relative max-w-2xl mx-auto"
+            >
+
+              <input
+                type="text"
+                name="q"
+                placeholder="Search iPhones, Samsung, PS5..."
+                className="w-full border rounded-2xl px-5 py-3 pr-14 outline-none focus:border-black bg-gray-50"
+              />
+
+              <button
+                type="submit"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"
+              >
+
+                <Search size={20} />
+
+              </button>
+
+            </form>
+
+          </div>
+
+          {/* ACTIONS */}
+          <div className="flex items-center gap-2 sm:gap-3">
+
+            {/* TRADE IN */}
+            <Link href="/trade-in">
+
+              <button className="hidden md:flex items-center gap-2 border px-4 py-3 rounded-2xl hover:bg-gray-100 transition font-semibold whitespace-nowrap">
+
+                <Repeat size={18} />
+
+                Trade-In
+
+              </button>
+
+            </Link>
+
+            {/* DEALER LOGIN */}
+            <Link href="/auth">
+
+              <button className="bg-black text-white px-4 sm:px-5 py-3 rounded-2xl hover:bg-gray-800 transition font-semibold text-sm sm:text-base whitespace-nowrap">
+                Dealer Login
+              </button>
+
+            </Link>
+
+            {/* CART */}
+            <Link href="/cart">
+
+              <div className="relative cursor-pointer">
+
+                <div className="border p-3 rounded-2xl hover:bg-gray-100 transition">
+
+                  <ShoppingCart size={22} />
+
+                </div>
+
+                {cartCount > 0 && (
+
+                  <div className="absolute -top-2 -right-2 bg-black text-white min-w-[22px] h-[22px] px-1 rounded-full text-xs flex items-center justify-center font-bold">
+
+                    {cartCount}
+
+                  </div>
+
+                )}
+
+              </div>
+
+            </Link>
+
+          </div>
+
+        </div>
+
+        {/* MOBILE SEARCH */}
+        <div className="mt-4 lg:hidden">
 
           <form
             action="/search"
@@ -70,104 +159,26 @@ export default function Navbar() {
             <input
               type="text"
               name="q"
-              placeholder="Search iPhones, Samsung, PS5..."
-              className="w-full border rounded-2xl px-5 py-3 pr-14 outline-none focus:border-black"
+              placeholder="Search phones..."
+              className="w-full border rounded-2xl px-5 py-3 pr-14 outline-none focus:border-black bg-gray-50"
             />
 
             <button
               type="submit"
-              className="absolute right-4 top-1/2 -translate-y-1/2"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"
             >
-              🔍
+
+              <Search size={20} />
+
             </button>
 
           </form>
 
         </div>
 
-        {/* ACTIONS */}
-        <div className="flex items-center gap-3">
-
-          {/* TRADE IN */}
-          <Link href="/trade-in">
-
-            <button className="hidden md:flex items-center gap-2 border px-4 py-3 rounded-2xl hover:bg-gray-100 transition font-semibold">
-
-              <Repeat size={18} />
-
-              Trade-In
-
-            </button>
-
-          </Link>
-
-          {/* DEALER LOGIN */}
-          <Link href="/auth">
-
-            <button className="bg-black text-white px-5 py-3 rounded-2xl hover:bg-gray-800 transition font-semibold">
-
-              Dealer Login
-
-            </button>
-
-          </Link>
-
-          {/* CART */}
-          <Link href="/cart">
-
-            <div className="relative cursor-pointer">
-
-              <div className="border p-3 rounded-2xl hover:bg-gray-100 transition">
-
-                <ShoppingCart size={24} />
-
-              </div>
-
-              {cartCount > 0 && (
-
-                <div className="absolute -top-2 -right-2 bg-black text-white w-6 h-6 rounded-full text-xs flex items-center justify-center font-bold">
-
-                  {cartCount}
-
-                </div>
-
-              )}
-
-            </div>
-
-          </Link>
-
-        </div>
-
-      </div>
-
-      {/* MOBILE SEARCH */}
-      <div className="px-4 pb-4 md:hidden">
-
-        <form
-          action="/search"
-          method="GET"
-          className="relative"
-        >
-
-          <input
-            type="text"
-            name="q"
-            placeholder="Search phones..."
-            className="w-full border rounded-2xl px-5 py-3 pr-14 outline-none focus:border-black"
-          />
-
-          <button
-            type="submit"
-            className="absolute right-4 top-1/2 -translate-y-1/2"
-          >
-            🔍
-          </button>
-
-        </form>
-
       </div>
 
     </nav>
+
   )
 }

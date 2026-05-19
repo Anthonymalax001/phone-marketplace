@@ -14,9 +14,11 @@ export default function ProductPage() {
   const [wishlisted, setWishlisted] = useState(false)
 
   useEffect(() => {
+
     if (params?.id) {
       fetchProduct()
     }
+
   }, [params])
 
   const fetchProduct = async () => {
@@ -27,12 +29,14 @@ export default function ProductPage() {
       .eq('id', params.id)
       .single()
 
-    if (!error) {
+    if (!error && data) {
 
       setProduct(data)
 
       const wishlist =
-        JSON.parse(localStorage.getItem('wishlist')) || []
+        JSON.parse(
+          localStorage.getItem('wishlist')
+        ) || []
 
       const exists = wishlist.find(
         (item) => item.id === data.id
@@ -45,18 +49,24 @@ export default function ProductPage() {
   const addToCart = () => {
 
     const existingCart =
-      JSON.parse(localStorage.getItem('cart')) || []
+      JSON.parse(
+        localStorage.getItem('cart')
+      ) || []
 
     const alreadyExists = existingCart.find(
       (item) => item.id === product.id
     )
 
     if (alreadyExists) {
+
       alert('Product already in cart')
       return
     }
 
-    const updatedCart = [...existingCart, product]
+    const updatedCart = [
+      ...existingCart,
+      product,
+    ]
 
     localStorage.setItem(
       'cart',
@@ -75,11 +85,14 @@ export default function ProductPage() {
   const toggleWishlist = () => {
 
     const existingWishlist =
-      JSON.parse(localStorage.getItem('wishlist')) || []
+      JSON.parse(
+        localStorage.getItem('wishlist')
+      ) || []
 
-    const alreadyExists = existingWishlist.find(
-      (item) => item.id === product.id
-    )
+    const alreadyExists =
+      existingWishlist.find(
+        (item) => item.id === product.id
+      )
 
     let updatedWishlist = []
 
@@ -87,7 +100,8 @@ export default function ProductPage() {
 
       updatedWishlist =
         existingWishlist.filter(
-          (item) => item.id !== product.id
+          (item) =>
+            item.id !== product.id
         )
 
       setWishlisted(false)
@@ -113,20 +127,31 @@ export default function ProductPage() {
   }
 
   if (!product) {
+
     return (
-      <div className="min-h-screen flex items-center justify-center text-2xl font-bold">
-        Loading...
+
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+
+        <div className="bg-white px-10 py-8 rounded-3xl shadow-sm">
+
+          <h2 className="text-2xl font-bold">
+            Loading...
+          </h2>
+
+        </div>
+
       </div>
+
     )
   }
 
   return (
-    <main className="min-h-screen bg-gray-100 p-4 md:p-10">
+    <main className="min-h-screen bg-gray-100 px-4 sm:px-6 lg:px-10 py-6 lg:py-10 overflow-x-hidden">
 
       <div className="max-w-7xl mx-auto">
 
         {/* TOP SECTION */}
-        <div className="bg-white rounded-3xl p-5 md:p-10 grid lg:grid-cols-2 gap-10 shadow-sm">
+        <div className="bg-white rounded-3xl p-4 sm:p-6 lg:p-10 grid lg:grid-cols-2 gap-8 lg:gap-12 shadow-sm">
 
           {/* IMAGE */}
           <div>
@@ -136,7 +161,7 @@ export default function ProductPage() {
               <img
                 src={product.image_url}
                 alt={product.name}
-                className="w-full h-full object-cover hover:scale-105 transition duration-500"
+                className="w-full h-[320px] sm:h-[450px] lg:h-[600px] object-cover hover:scale-105 transition duration-500"
               />
 
               {/* WISHLIST */}
@@ -162,21 +187,27 @@ export default function ProductPage() {
             <div className="flex flex-wrap gap-3 mt-5">
 
               {product.dealer_verified && (
+
                 <div className="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold">
                   ✓ Verified Dealer
                 </div>
+
               )}
 
               {product.warranty && (
+
                 <div className="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold">
                   {product.warranty} Warranty
                 </div>
+
               )}
 
               {product.battery_health && (
+
                 <div className="bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full text-sm font-semibold">
                   🔋 {product.battery_health}
                 </div>
+
               )}
 
             </div>
@@ -186,24 +217,27 @@ export default function ProductPage() {
           {/* DETAILS */}
           <div>
 
-            <div className="flex items-start justify-between gap-4">
+            {/* TITLE */}
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
 
               <div>
 
-                <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight break-words">
                   {product.name}
                 </h1>
 
-                <p className="text-gray-500 mt-3 text-lg">
-                  Premium verified electronics marketplace listing
+                <p className="text-gray-500 mt-3 text-base sm:text-lg">
+                  Premium verified marketplace listing
                 </p>
 
               </div>
 
               {product.dealer_verified && (
-                <div className="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-bold whitespace-nowrap">
+
+                <div className="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-bold whitespace-nowrap w-fit">
                   VERIFIED
                 </div>
+
               )}
 
             </div>
@@ -215,7 +249,7 @@ export default function ProductPage() {
                 Price
               </p>
 
-              <h2 className="text-5xl font-bold mt-2">
+              <h2 className="text-4xl sm:text-5xl font-bold mt-2 break-words">
                 KES {product.price}
               </h2>
 
@@ -224,49 +258,49 @@ export default function ProductPage() {
             {/* SPECS */}
             <div className="grid grid-cols-2 gap-4 mt-8">
 
-              <div className="bg-gray-50 p-5 rounded-2xl">
+              <div className="bg-gray-50 p-4 sm:p-5 rounded-2xl">
 
                 <p className="text-gray-500 text-sm">
                   Storage
                 </p>
 
-                <h3 className="text-xl font-bold mt-2">
+                <h3 className="text-lg sm:text-xl font-bold mt-2">
                   {product.storage}
                 </h3>
 
               </div>
 
-              <div className="bg-gray-50 p-5 rounded-2xl">
+              <div className="bg-gray-50 p-4 sm:p-5 rounded-2xl">
 
                 <p className="text-gray-500 text-sm">
                   RAM
                 </p>
 
-                <h3 className="text-xl font-bold mt-2">
+                <h3 className="text-lg sm:text-xl font-bold mt-2">
                   {product.ram}
                 </h3>
 
               </div>
 
-              <div className="bg-gray-50 p-5 rounded-2xl">
+              <div className="bg-gray-50 p-4 sm:p-5 rounded-2xl">
 
                 <p className="text-gray-500 text-sm">
                   Condition
                 </p>
 
-                <h3 className="text-xl font-bold mt-2 capitalize">
+                <h3 className="text-lg sm:text-xl font-bold mt-2 capitalize">
                   {product.condition}
                 </h3>
 
               </div>
 
-              <div className="bg-gray-50 p-5 rounded-2xl">
+              <div className="bg-gray-50 p-4 sm:p-5 rounded-2xl">
 
                 <p className="text-gray-500 text-sm">
                   Battery Health
                 </p>
 
-                <h3 className="text-xl font-bold mt-2">
+                <h3 className="text-lg sm:text-xl font-bold mt-2">
                   {product.battery_health || 'N/A'}
                 </h3>
 
@@ -281,16 +315,16 @@ export default function ProductPage() {
                 Device Description
               </h2>
 
-              <p className="text-gray-700 leading-8 text-lg">
+              <p className="text-gray-700 leading-7 sm:leading-8 text-base sm:text-lg break-words">
                 {product.description}
               </p>
 
             </div>
 
             {/* DEALER */}
-            <div className="bg-gray-50 rounded-3xl p-6 mt-10">
+            <div className="bg-gray-50 rounded-3xl p-5 sm:p-6 mt-10">
 
-              <div className="flex items-center justify-between gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
 
                 <div>
 
@@ -298,25 +332,29 @@ export default function ProductPage() {
                     Sold by
                   </p>
 
-                  <h2 className="text-2xl font-bold mt-1">
+                  <h2 className="text-2xl font-bold mt-1 break-words">
                     {product.seller_name || 'Tech Dealer'}
                   </h2>
 
                 </div>
 
-                <div className={`px-4 py-2 rounded-full text-sm font-semibold ${
-                  product.dealer_verified
-                    ? 'bg-green-100 text-green-700'
-                    : 'bg-yellow-100 text-yellow-700'
-                }`}>
+                <div
+                  className={`px-4 py-2 rounded-full text-sm font-semibold w-fit ${
+                    product.dealer_verified
+                      ? 'bg-green-100 text-green-700'
+                      : 'bg-yellow-100 text-yellow-700'
+                  }`}
+                >
+
                   {product.dealer_verified
                     ? 'Verified Dealer'
                     : 'Pending Verification'}
+
                 </div>
 
               </div>
 
-              <div className="grid md:grid-cols-2 gap-5 mt-6">
+              <div className="grid sm:grid-cols-2 gap-4 mt-6">
 
                 <div className="bg-white p-5 rounded-2xl">
 
@@ -324,7 +362,7 @@ export default function ProductPage() {
                     Phone Number
                   </p>
 
-                  <h3 className="text-lg font-bold mt-2">
+                  <h3 className="text-base sm:text-lg font-bold mt-2 break-words">
                     {product.seller_phone || 'Not Provided'}
                   </h3>
 
@@ -336,7 +374,7 @@ export default function ProductPage() {
                     Shop Location
                   </p>
 
-                  <h3 className="text-lg font-bold mt-2">
+                  <h3 className="text-base sm:text-lg font-bold mt-2 break-words">
                     {product.seller_location || 'Nairobi, Kenya'}
                   </h3>
 
@@ -347,37 +385,41 @@ export default function ProductPage() {
             </div>
 
             {/* ACTIONS */}
-            <div className="grid md:grid-cols-2 gap-4 mt-10">
+            <div className="grid sm:grid-cols-2 gap-4 mt-10">
 
               <a
-  href={`https://wa.me/${String(product.seller_phone)
-    .replace(/\+/g, '')
-    .replace(/\s/g, '')
-    .replace(/^0/, '254')}`}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="w-full"
->
+                href={`https://wa.me/${String(product.seller_phone)
+                  .replace(/\+/g, '')
+                  .replace(/\s/g, '')
+                  .replace(/^0/, '254')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full"
+              >
 
-  <button className="w-full bg-black text-white py-4 rounded-2xl text-lg hover:bg-gray-800 transition font-semibold">
-    Chat on WhatsApp
-  </button>
+                <button className="w-full bg-black text-white py-4 rounded-2xl text-base sm:text-lg hover:bg-gray-800 transition font-semibold">
 
-</a>
+                  Chat on WhatsApp
+
+                </button>
+
+              </a>
 
               <button
                 onClick={addToCart}
-                className="border border-black py-4 rounded-2xl text-lg hover:bg-black hover:text-white transition font-semibold"
+                className="border border-black py-4 rounded-2xl text-base sm:text-lg hover:bg-black hover:text-white transition font-semibold"
               >
+
                 Add To Cart
+
               </button>
 
             </div>
 
-            {/* WISHLIST BUTTON */}
+            {/* WISHLIST */}
             <button
               onClick={toggleWishlist}
-              className={`w-full py-4 rounded-2xl text-lg mt-4 transition font-semibold ${
+              className={`w-full py-4 rounded-2xl text-base sm:text-lg mt-4 transition font-semibold ${
                 wishlisted
                   ? 'bg-red-500 text-white'
                   : 'bg-white border border-black hover:bg-black hover:text-white'
@@ -391,13 +433,13 @@ export default function ProductPage() {
             </button>
 
             {/* BUYER PROTECTION */}
-            <div className="bg-gray-50 rounded-2xl p-6 mt-10">
+            <div className="bg-gray-50 rounded-2xl p-5 sm:p-6 mt-10">
 
               <h3 className="text-2xl font-bold">
                 Buyer Protection
               </h3>
 
-              <div className="mt-5 space-y-4 text-gray-700">
+              <div className="mt-5 space-y-4 text-gray-700 text-sm sm:text-base">
 
                 <p>
                   ✓ Verified seller & device checks

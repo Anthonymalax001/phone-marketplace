@@ -120,18 +120,18 @@ export default function OrdersDashboard() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-100 p-4 md:p-10">
+    <main className="min-h-screen bg-gray-100 px-4 py-6 sm:px-6 lg:px-10 lg:py-10">
 
       <div className="max-w-7xl mx-auto">
 
         {/* TOP BAR */}
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-10">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
 
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-3">
 
             <Link href="/dashboard">
 
-              <button className="bg-black text-white px-6 py-3 rounded-2xl hover:bg-gray-800 transition">
+              <button className="bg-black text-white px-5 py-3 rounded-2xl hover:bg-gray-800 transition text-sm sm:text-base">
                 ← Dashboard
               </button>
 
@@ -141,7 +141,7 @@ export default function OrdersDashboard() {
 
               <Link href="/admin">
 
-                <button className="border border-black px-6 py-3 rounded-2xl hover:bg-black hover:text-white transition">
+                <button className="border border-black px-5 py-3 rounded-2xl hover:bg-black hover:text-white transition text-sm sm:text-base">
                   Admin Panel
                 </button>
 
@@ -156,20 +156,20 @@ export default function OrdersDashboard() {
         </div>
 
         {/* HEADER */}
-        <div className="mb-10">
+        <div className="mb-8">
 
-          <h1 className="text-4xl md:text-5xl font-bold">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
             Orders Dashboard
           </h1>
 
-          <p className="text-gray-500 mt-3 text-lg">
+          <p className="text-gray-500 mt-3 text-base sm:text-lg">
             Manage customer orders & deliveries
           </p>
 
         </div>
 
         {/* ANALYTICS */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-10">
 
           <div className="bg-white rounded-3xl p-6 shadow-sm">
 
@@ -177,7 +177,7 @@ export default function OrdersDashboard() {
               Total Orders
             </p>
 
-            <h2 className="text-4xl font-bold mt-3">
+            <h2 className="text-3xl sm:text-4xl font-bold mt-3">
               {orders.length}
             </h2>
 
@@ -189,7 +189,7 @@ export default function OrdersDashboard() {
               Revenue
             </p>
 
-            <h2 className="text-4xl font-bold mt-3">
+            <h2 className="text-3xl sm:text-4xl font-bold mt-3 break-words">
               KES {totalRevenue}
             </h2>
 
@@ -201,7 +201,7 @@ export default function OrdersDashboard() {
               Pending Orders
             </p>
 
-            <h2 className="text-4xl font-bold mt-3">
+            <h2 className="text-3xl sm:text-4xl font-bold mt-3">
               {pendingOrders}
             </h2>
 
@@ -213,7 +213,7 @@ export default function OrdersDashboard() {
               Delivered Orders
             </p>
 
-            <h2 className="text-4xl font-bold mt-3">
+            <h2 className="text-3xl sm:text-4xl font-bold mt-3">
               {deliveredOrders}
             </h2>
 
@@ -224,9 +224,9 @@ export default function OrdersDashboard() {
         {/* LOADING */}
         {loading ? (
 
-          <div className="bg-white rounded-3xl p-16 text-center">
+          <div className="bg-white rounded-3xl p-10 sm:p-16 text-center">
 
-            <h2 className="text-3xl font-bold">
+            <h2 className="text-2xl sm:text-3xl font-bold">
               Loading Orders...
             </h2>
 
@@ -234,9 +234,9 @@ export default function OrdersDashboard() {
 
         ) : orders.length === 0 ? (
 
-          <div className="bg-white rounded-3xl p-16 text-center">
+          <div className="bg-white rounded-3xl p-10 sm:p-16 text-center">
 
-            <h2 className="text-4xl font-bold">
+            <h2 className="text-3xl sm:text-4xl font-bold">
               No orders yet
             </h2>
 
@@ -254,166 +254,173 @@ export default function OrdersDashboard() {
 
               <div
                 key={order.id}
-                className="bg-white rounded-3xl p-6 md:p-8 shadow-sm"
+                className="bg-white rounded-3xl p-5 sm:p-6 lg:p-8 shadow-sm"
               >
 
-                <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-8">
+                <div className="flex flex-col gap-8">
 
-                  {/* LEFT */}
-                  <div className="flex-1">
+                  {/* TOP */}
+                  <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
 
-                    <div className="flex flex-wrap items-center gap-4">
+                    {/* CUSTOMER */}
+                    <div className="flex-1">
 
-                      <h2 className="text-3xl font-bold">
-                        {order.full_name || 'Customer'}
-                      </h2>
+                      <div className="flex flex-wrap items-center gap-3">
 
-                      <div
-                        className={`px-4 py-2 rounded-full text-sm font-semibold capitalize ${getStatusColor(order.status)}`}
-                      >
-                        {order.status || 'pending'}
+                        <h2 className="text-2xl sm:text-3xl font-bold break-words">
+                          {order.full_name || 'Customer'}
+                        </h2>
+
+                        <div
+                          className={`px-4 py-2 rounded-full text-sm font-semibold capitalize ${getStatusColor(order.status)}`}
+                        >
+                          {order.status || 'pending'}
+                        </div>
+
+                      </div>
+
+                      {/* INFO GRID */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 mt-8">
+
+                        <div>
+
+                          <p className="text-gray-500 text-sm">
+                            Phone Number
+                          </p>
+
+                          <h3 className="font-bold text-base sm:text-lg mt-1 break-words">
+                            {order.phone}
+                          </h3>
+
+                        </div>
+
+                        <div>
+
+                          <p className="text-gray-500 text-sm">
+                            County
+                          </p>
+
+                          <h3 className="font-bold text-base sm:text-lg mt-1">
+                            {order.county}
+                          </h3>
+
+                        </div>
+
+                        <div>
+
+                          <p className="text-gray-500 text-sm">
+                            Town
+                          </p>
+
+                          <h3 className="font-bold text-base sm:text-lg mt-1">
+                            {order.town}
+                          </h3>
+
+                        </div>
+
+                        <div>
+
+                          <p className="text-gray-500 text-sm">
+                            Payment Method
+                          </p>
+
+                          <h3 className="font-bold text-base sm:text-lg mt-1 capitalize">
+                            {order.payment_method || 'mpesa'}
+                          </h3>
+
+                        </div>
+
+                        <div>
+
+                          <p className="text-gray-500 text-sm">
+                            Delivery Fee
+                          </p>
+
+                          <h3 className="font-bold text-base sm:text-lg mt-1">
+                            KES {order.delivery_fee || 0}
+                          </h3>
+
+                        </div>
+
+                        <div>
+
+                          <p className="text-gray-500 text-sm">
+                            Order Date
+                          </p>
+
+                          <h3 className="font-bold text-base sm:text-lg mt-1">
+                            {new Date(
+                              order.created_at
+                            ).toLocaleDateString()}
+                          </h3>
+
+                        </div>
+
+                      </div>
+
+                      {/* ADDRESS */}
+                      <div className="mt-8">
+
+                        <p className="text-gray-500 text-sm">
+                          Delivery Address
+                        </p>
+
+                        <h3 className="font-bold text-base sm:text-lg mt-2 break-words">
+                          {order.address}
+                        </h3>
+
                       </div>
 
                     </div>
 
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-
-                      <div>
-
-                        <p className="text-gray-500 text-sm">
-                          Phone Number
-                        </p>
-
-                        <h3 className="font-bold text-lg mt-1">
-                          {order.phone}
-                        </h3>
-
-                      </div>
-
-                      <div>
-
-                        <p className="text-gray-500 text-sm">
-                          County
-                        </p>
-
-                        <h3 className="font-bold text-lg mt-1">
-                          {order.county}
-                        </h3>
-
-                      </div>
-
-                      <div>
-
-                        <p className="text-gray-500 text-sm">
-                          Town
-                        </p>
-
-                        <h3 className="font-bold text-lg mt-1">
-                          {order.town}
-                        </h3>
-
-                      </div>
-
-                      <div>
-
-                        <p className="text-gray-500 text-sm">
-                          Payment Method
-                        </p>
-
-                        <h3 className="font-bold text-lg mt-1 capitalize">
-                          {order.payment_method || 'mpesa'}
-                        </h3>
-
-                      </div>
-
-                      <div>
-
-                        <p className="text-gray-500 text-sm">
-                          Delivery Fee
-                        </p>
-
-                        <h3 className="font-bold text-lg mt-1">
-                          KES {order.delivery_fee || 0}
-                        </h3>
-
-                      </div>
-
-                      <div>
-
-                        <p className="text-gray-500 text-sm">
-                          Order Date
-                        </p>
-
-                        <h3 className="font-bold text-lg mt-1">
-                          {new Date(
-                            order.created_at
-                          ).toLocaleDateString()}
-                        </h3>
-
-                      </div>
-
-                    </div>
-
-                    <div className="mt-8">
+                    {/* TOTAL + STATUS */}
+                    <div className="w-full lg:w-[320px] bg-gray-50 rounded-3xl p-6">
 
                       <p className="text-gray-500 text-sm">
-                        Delivery Address
+                        Order Total
                       </p>
 
-                      <h3 className="font-bold text-lg mt-2">
-                        {order.address}
-                      </h3>
+                      <h2 className="text-3xl sm:text-5xl font-bold mt-3 break-words">
+                        KES {order.total}
+                      </h2>
 
-                    </div>
+                      <div className="mt-8">
 
-                  </div>
+                        <p className="text-gray-500 text-sm mb-3">
+                          Update Order Status
+                        </p>
 
-                  {/* RIGHT */}
-                  <div className="xl:text-right">
+                        <select
+                          value={order.status || 'pending'}
+                          onChange={(e) =>
+                            updateStatus(order.id, e.target.value)
+                          }
+                          className="w-full border px-4 py-4 rounded-2xl font-semibold text-base outline-none"
+                        >
 
-                    <p className="text-gray-500 text-sm">
-                      Order Total
-                    </p>
+                          <option value="pending">
+                            Pending
+                          </option>
 
-                    <h2 className="text-5xl font-bold mt-2">
-                      KES {order.total}
-                    </h2>
+                          <option value="paid">
+                            Paid
+                          </option>
 
-                    <div className="mt-8">
+                          <option value="shipped">
+                            Shipped
+                          </option>
 
-                      <p className="text-gray-500 text-sm mb-3">
-                        Update Order Status
-                      </p>
+                          <option value="delivered">
+                            Delivered
+                          </option>
 
-                      <select
-                        value={order.status || 'pending'}
-                        onChange={(e) =>
-                          updateStatus(order.id, e.target.value)
-                        }
-                        className="border px-5 py-4 rounded-2xl font-semibold text-lg"
-                      >
+                          <option value="cancelled">
+                            Cancelled
+                          </option>
 
-                        <option value="pending">
-                          Pending
-                        </option>
+                        </select>
 
-                        <option value="paid">
-                          Paid
-                        </option>
-
-                        <option value="shipped">
-                          Shipped
-                        </option>
-
-                        <option value="delivered">
-                          Delivered
-                        </option>
-
-                        <option value="cancelled">
-                          Cancelled
-                        </option>
-
-                      </select>
+                      </div>
 
                     </div>
 

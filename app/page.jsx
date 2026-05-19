@@ -24,9 +24,6 @@ export default function HomePage() {
       .eq('dealer_verified', true)
       .order('id', { ascending: false })
 
-    console.log('PRODUCTS:', data)
-    console.log('ERROR:', error)
-
     if (!error && data) {
       setProducts(data)
     }
@@ -38,7 +35,7 @@ export default function HomePage() {
     <main className="min-h-screen bg-gray-100 overflow-x-hidden">
 
       {/* HERO */}
-      <section className="bg-black text-white px-4 sm:px-6 lg:px-10 py-16 lg:py-24">
+      <section className="bg-black text-white px-4 sm:px-6 lg:px-10 py-14 sm:py-16 lg:py-24">
 
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-14 items-center">
 
@@ -53,25 +50,32 @@ export default function HomePage() {
               Buy Verified Phones & Electronics
             </h1>
 
-            <p className="text-gray-300 mt-6 text-base sm:text-lg lg:text-xl leading-8 max-w-2xl">
+            <p className="text-gray-300 mt-6 text-base sm:text-lg lg:text-xl leading-7 sm:leading-8 max-w-2xl">
               Discover verified iPhones, Samsung devices,
               gaming consoles, laptops and accessories
               from trusted Kenyan dealers.
             </p>
 
+            {/* HERO BUTTONS */}
             <div className="flex flex-col sm:flex-row gap-4 mt-10">
 
-              <Link href="/search?q=iphone">
+              <Link
+                href="/search?q=iphone"
+                className="w-full sm:w-auto"
+              >
 
-                <button className="w-full sm:w-auto bg-white text-black px-8 py-4 rounded-2xl text-lg font-semibold hover:scale-[1.02] transition">
+                <button className="w-full bg-white text-black px-8 py-4 rounded-2xl text-base sm:text-lg font-semibold hover:scale-[1.02] transition">
                   Shop iPhones
                 </button>
 
               </Link>
 
-              <Link href="/search?q=samsung">
+              <Link
+                href="/search?q=samsung"
+                className="w-full sm:w-auto"
+              >
 
-                <button className="w-full sm:w-auto border border-white px-8 py-4 rounded-2xl text-lg hover:bg-white hover:text-black transition">
+                <button className="w-full border border-white px-8 py-4 rounded-2xl text-base sm:text-lg hover:bg-white hover:text-black transition">
                   Samsung Deals
                 </button>
 
@@ -80,7 +84,7 @@ export default function HomePage() {
             </div>
 
             {/* STATS */}
-            <div className="grid grid-cols-3 gap-6 mt-12">
+            <div className="grid grid-cols-3 gap-4 sm:gap-6 mt-12">
 
               <div>
 
@@ -128,13 +132,13 @@ export default function HomePage() {
             <img
               src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"
               alt="Phones"
-              className="rounded-3xl shadow-2xl w-full h-[300px] sm:h-[450px] lg:h-[520px] object-cover"
+              className="rounded-3xl shadow-2xl w-full h-[260px] sm:h-[420px] lg:h-[520px] object-cover"
             />
 
             {/* FLOATING CARD */}
             <div className="absolute bottom-4 left-4 right-4 sm:right-auto sm:w-72 bg-white text-black rounded-3xl p-5 shadow-2xl">
 
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between gap-4">
 
                 <div>
 
@@ -142,13 +146,13 @@ export default function HomePage() {
                     Trending
                   </p>
 
-                  <h3 className="text-xl font-bold mt-1">
+                  <h3 className="text-lg sm:text-xl font-bold mt-1">
                     iPhone 15 Pro
                   </h3>
 
                 </div>
 
-                <div className="bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full">
+                <div className="bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full whitespace-nowrap">
                   VERIFIED
                 </div>
 
@@ -170,15 +174,16 @@ export default function HomePage() {
       <Categories />
 
       {/* FEATURED PRODUCTS */}
-      <section className="px-4 sm:px-6 lg:px-10 py-16">
+      <section className="px-4 sm:px-6 lg:px-10 py-14 sm:py-16">
 
         <div className="max-w-7xl mx-auto">
 
+          {/* HEADER */}
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 mb-10">
 
             <div>
 
-              <h2 className="text-4xl lg:text-5xl font-bold">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
                 Featured Products
               </h2>
 
@@ -190,7 +195,7 @@ export default function HomePage() {
 
             <Link href="/search?q=iphone">
 
-              <button className="border border-black px-6 py-3 rounded-2xl hover:bg-black hover:text-white transition">
+              <button className="w-full sm:w-auto border border-black px-6 py-3 rounded-2xl hover:bg-black hover:text-white transition">
                 Explore Marketplace
               </button>
 
@@ -201,9 +206,9 @@ export default function HomePage() {
           {/* LOADING */}
           {loading ? (
 
-            <div className="bg-white rounded-3xl p-16 text-center">
+            <div className="bg-white rounded-3xl p-10 sm:p-16 text-center">
 
-              <h2 className="text-3xl font-bold">
+              <h2 className="text-2xl sm:text-3xl font-bold">
                 Loading Products...
               </h2>
 
@@ -211,13 +216,13 @@ export default function HomePage() {
 
           ) : products.length === 0 ? (
 
-            <div className="bg-white rounded-3xl p-16 text-center">
+            <div className="bg-white rounded-3xl p-10 sm:p-16 text-center">
 
-              <h2 className="text-4xl font-bold">
+              <h2 className="text-3xl sm:text-4xl font-bold">
                 No Products Found
               </h2>
 
-              <p className="text-gray-500 mt-4 text-lg">
+              <p className="text-gray-500 mt-4 text-base sm:text-lg">
                 Add products from the dashboard.
               </p>
 
@@ -225,7 +230,7 @@ export default function HomePage() {
 
           ) : (
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
 
               {products.map((product) => (
 
@@ -234,12 +239,13 @@ export default function HomePage() {
                   className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-1 transition duration-300"
                 >
 
+                  {/* IMAGE */}
                   <div className="relative">
 
                     <img
                       src={product.image_url}
                       alt={product.name}
-                      className="h-64 w-full object-cover"
+                      className="h-56 sm:h-64 w-full object-cover"
                     />
 
                     {product.dealer_verified && (
@@ -252,9 +258,10 @@ export default function HomePage() {
 
                   </div>
 
+                  {/* CONTENT */}
                   <div className="p-5">
 
-                    <h2 className="text-2xl font-bold line-clamp-1">
+                    <h2 className="text-xl sm:text-2xl font-bold line-clamp-1">
                       {product.name}
                     </h2>
 
@@ -290,7 +297,7 @@ export default function HomePage() {
                         href={`/dealer/${product.dealer_slug}`}
                       >
 
-                        <h3 className="font-bold hover:underline cursor-pointer mt-1">
+                        <h3 className="font-bold hover:underline cursor-pointer mt-1 line-clamp-1">
                           {product.seller_name}
                         </h3>
 
