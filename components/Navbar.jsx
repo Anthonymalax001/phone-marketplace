@@ -48,17 +48,17 @@ export default function Navbar() {
 
   return (
 
-    <nav className="bg-white border-b sticky top-0 z-50 backdrop-blur-lg">
+    <nav className="bg-white/95 border-b sticky top-0 z-50 backdrop-blur-lg">
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
 
         {/* TOP NAV */}
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center justify-between gap-3">
 
           {/* LOGO */}
           <Link href="/">
 
-            <h1 className="text-2xl sm:text-3xl font-bold cursor-pointer whitespace-nowrap">
+            <h1 className="text-xl sm:text-3xl font-bold cursor-pointer whitespace-nowrap text-black">
               PhoneHub
             </h1>
 
@@ -77,7 +77,7 @@ export default function Navbar() {
                 type="text"
                 name="q"
                 placeholder="Search iPhones, Samsung, PS5..."
-                className="w-full border rounded-2xl px-5 py-3 pr-14 outline-none focus:border-black bg-gray-50"
+                className="w-full border rounded-2xl px-5 py-3 pr-14 outline-none focus:border-black bg-gray-50 text-black placeholder:text-gray-400"
               />
 
               <button
@@ -94,16 +94,18 @@ export default function Navbar() {
           </div>
 
           {/* ACTIONS */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-2">
 
             {/* TRADE IN */}
             <Link href="/trade-in">
 
-              <button className="hidden md:flex items-center gap-2 border px-4 py-3 rounded-2xl hover:bg-gray-100 transition font-semibold whitespace-nowrap">
+              <button className="flex items-center gap-2 border px-3 sm:px-4 py-3 rounded-2xl hover:bg-gray-100 transition font-semibold whitespace-nowrap text-sm sm:text-base">
 
-                <Repeat size={18} />
+                <Repeat size={17} />
 
-                Trade-In
+                <span className="hidden sm:inline">
+                  Trade-In
+                </span>
 
               </button>
 
@@ -123,7 +125,7 @@ export default function Navbar() {
 
               <div className="relative cursor-pointer">
 
-                <div className="border p-3 rounded-2xl hover:bg-gray-100 transition">
+                <div className="border p-3 rounded-2xl hover:bg-gray-100 transition bg-white">
 
                   <ShoppingCart size={22} />
 
@@ -160,7 +162,7 @@ export default function Navbar() {
               type="text"
               name="q"
               placeholder="Search phones..."
-              className="w-full border rounded-2xl px-5 py-3 pr-14 outline-none focus:border-black bg-gray-50"
+              className="w-full border rounded-2xl px-5 py-3 pr-14 outline-none focus:border-black bg-gray-50 text-black placeholder:text-gray-400"
             />
 
             <button
