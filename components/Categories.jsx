@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+
 import {
   Smartphone,
   Laptop,
@@ -39,23 +40,26 @@ export default function Categories() {
   ]
 
   return (
-    <section className="px-4 sm:px-6 md:px-10 py-14 bg-white">
+
+    <section className="px-4 sm:px-6 lg:px-10 py-14 bg-white overflow-x-hidden">
 
       <div className="max-w-7xl mx-auto">
 
+        {/* HEADER */}
         <div className="mb-10">
 
-          <h2 className="text-4xl md:text-5xl font-bold">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-black">
             Browse Categories
           </h2>
 
-          <p className="text-gray-500 mt-3 text-lg">
+          <p className="text-gray-600 mt-3 text-base sm:text-lg">
             Explore verified electronics instantly
           </p>
 
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-5">
+        {/* CATEGORIES */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-5">
 
           {categories.map((category) => {
 
@@ -68,13 +72,15 @@ export default function Categories() {
                 href={`/search?q=${category.query}`}
               >
 
-                <div className="bg-gray-100 hover:bg-black hover:text-white transition rounded-3xl p-8 text-center cursor-pointer">
+                <div className="bg-white border border-gray-200 hover:bg-black hover:text-white transition-all duration-300 rounded-3xl p-6 sm:p-8 text-center cursor-pointer shadow-sm hover:shadow-xl">
 
-                  <div className="flex justify-center mb-5">
-                    <Icon size={42} />
+                  <div className="flex justify-center mb-5 text-black hover:text-white">
+
+                    <Icon size={38} />
+
                   </div>
 
-                  <h3 className="text-xl font-bold">
+                  <h3 className="text-lg sm:text-xl font-bold text-black group-hover:text-white">
                     {category.name}
                   </h3>
 
@@ -91,5 +97,6 @@ export default function Categories() {
       </div>
 
     </section>
+
   )
 }

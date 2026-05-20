@@ -44,7 +44,7 @@ export default function CartPage() {
   const finalTotal = totalPrice + deliveryFee
 
   return (
-    <main className="min-h-screen bg-gray-100 p-6 md:p-10">
+    <main className="min-h-screen bg-gray-100 px-4 py-6 sm:px-6 lg:px-10 lg:py-10 overflow-x-hidden">
 
       <div className="max-w-7xl mx-auto">
 
@@ -53,33 +53,35 @@ export default function CartPage() {
 
           <div>
 
-            <h1 className="text-5xl font-bold">
+            <h1 className="text-3xl sm:text-5xl font-bold text-black">
               Shopping Cart
             </h1>
 
-            <p className="text-gray-500 mt-3 text-lg">
+            <p className="text-gray-600 mt-3 text-base sm:text-lg">
               {cart.length} items in your cart
             </p>
 
           </div>
 
           <Link href="/">
-            <button className="border border-black px-6 py-3 rounded-2xl hover:bg-black hover:text-white transition">
+
+            <button className="border border-black bg-white text-black px-6 py-3 rounded-2xl hover:bg-black hover:text-white transition font-semibold">
               Continue Shopping
             </button>
+
           </Link>
 
         </div>
 
         {cart.length === 0 ? (
 
-          <div className="bg-white rounded-3xl p-16 text-center">
+          <div className="bg-white rounded-3xl p-10 sm:p-16 text-center shadow-sm">
 
-            <h2 className="text-3xl font-bold">
+            <h2 className="text-2xl sm:text-3xl font-bold text-black">
               Your cart is empty
             </h2>
 
-            <p className="text-gray-500 mt-4">
+            <p className="text-gray-600 mt-4 text-base sm:text-lg">
               Add iPhones, Androids & electronics to continue.
             </p>
 
@@ -111,31 +113,33 @@ export default function CartPage() {
 
                       <div>
 
-                        <h2 className="text-3xl font-bold">
+                        <h2 className="text-2xl sm:text-3xl font-bold text-black break-words">
                           {product.name}
                         </h2>
 
-                        <p className="text-gray-500 mt-2">
+                        <p className="text-gray-600 mt-2 text-sm sm:text-base">
                           {product.storage} • {product.ram}
                         </p>
 
                         <div className="flex gap-2 mt-4 flex-wrap">
 
-                          <div className="bg-gray-100 px-3 py-1 rounded-full text-sm">
+                          <div className="bg-gray-200 text-black px-3 py-1 rounded-full text-sm font-medium">
                             {product.condition}
                           </div>
 
                           {product.verified && (
-                            <div className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">
+
+                            <div className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
                               Verified
                             </div>
+
                           )}
 
                         </div>
 
                       </div>
 
-                      <div className="text-3xl font-bold">
+                      <div className="text-2xl sm:text-3xl font-bold text-black break-words">
                         KES {Number(product.price).toLocaleString()}
                       </div>
 
@@ -143,7 +147,7 @@ export default function CartPage() {
 
                     <button
                       onClick={() => removeFromCart(product.id)}
-                      className="mt-6 border border-red-500 text-red-500 px-5 py-3 rounded-2xl hover:bg-red-500 hover:text-white transition"
+                      className="mt-6 border border-red-500 text-red-500 px-5 py-3 rounded-2xl hover:bg-red-500 hover:text-white transition font-semibold"
                     >
                       Remove Item
                     </button>
@@ -159,45 +163,45 @@ export default function CartPage() {
             {/* SUMMARY */}
             <div>
 
-              <div className="bg-white rounded-3xl p-8 sticky top-10 shadow-sm">
+              <div className="bg-white rounded-3xl p-6 sm:p-8 sticky top-10 shadow-sm">
 
-                <h2 className="text-3xl font-bold">
+                <h2 className="text-2xl sm:text-3xl font-bold text-black">
                   Order Summary
                 </h2>
 
                 <div className="space-y-5 mt-8">
 
-                  <div className="flex items-center justify-between text-lg">
+                  <div className="flex items-center justify-between text-base sm:text-lg">
 
-                    <p className="text-gray-500">
+                    <p className="text-gray-600">
                       Items
                     </p>
 
-                    <p className="font-semibold">
+                    <p className="font-semibold text-black">
                       {cart.length}
                     </p>
 
                   </div>
 
-                  <div className="flex items-center justify-between text-lg">
+                  <div className="flex items-center justify-between text-base sm:text-lg">
 
-                    <p className="text-gray-500">
+                    <p className="text-gray-600">
                       Subtotal
                     </p>
 
-                    <p className="font-semibold">
+                    <p className="font-semibold text-black">
                       KES {totalPrice.toLocaleString()}
                     </p>
 
                   </div>
 
-                  <div className="flex items-center justify-between text-lg">
+                  <div className="flex items-center justify-between text-base sm:text-lg">
 
-                    <p className="text-gray-500">
+                    <p className="text-gray-600">
                       Delivery Fee
                     </p>
 
-                    <p className="font-semibold">
+                    <p className="font-semibold text-black">
                       KES {deliveryFee.toLocaleString()}
                     </p>
 
@@ -205,11 +209,11 @@ export default function CartPage() {
 
                   <div className="border-t pt-5 flex items-center justify-between">
 
-                    <h3 className="text-2xl font-bold">
+                    <h3 className="text-xl sm:text-2xl font-bold text-black">
                       Total
                     </h3>
 
-                    <h3 className="text-3xl font-bold">
+                    <h3 className="text-2xl sm:text-3xl font-bold text-black break-words">
                       KES {finalTotal.toLocaleString()}
                     </h3>
 
@@ -219,12 +223,12 @@ export default function CartPage() {
 
                 <button
                   onClick={() => router.push('/checkout')}
-                  className="w-full bg-black text-white py-5 rounded-2xl mt-10 text-lg hover:bg-gray-800 transition"
+                  className="w-full bg-black text-white py-5 rounded-2xl mt-10 text-base sm:text-lg hover:bg-gray-800 transition font-semibold"
                 >
                   Proceed to Checkout
                 </button>
 
-                <p className="text-sm text-gray-500 mt-5 text-center">
+                <p className="text-sm text-gray-600 mt-5 text-center leading-6">
                   Secure checkout with M-Pesa integration coming next.
                 </p>
 

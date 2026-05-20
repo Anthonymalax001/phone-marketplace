@@ -83,7 +83,9 @@ export default function AddProductPage() {
       ])
 
     if (error) {
+
       alert(error.message)
+
     } else {
 
       alert('Product added successfully!')
@@ -107,29 +109,31 @@ export default function AddProductPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-100 p-6 md:p-10">
 
-      <div className="max-w-3xl mx-auto bg-white p-8 rounded-3xl shadow-sm">
+    <main className="min-h-screen bg-gray-100 px-4 py-6 sm:px-6 lg:px-10 lg:py-10 overflow-x-hidden">
 
+      <div className="max-w-3xl mx-auto bg-white p-5 sm:p-8 rounded-3xl shadow-sm">
+
+        {/* HEADER */}
         <div className="mb-10">
 
-          <h1 className="text-4xl font-bold">
+          <h1 className="text-3xl sm:text-4xl font-bold text-black">
             Dealer Product Upload
           </h1>
 
-          <p className="text-gray-500 mt-3 text-lg">
-            Upload verified iPhones, Androids, laptops, consoles and trade-in devices.
+          <p className="text-gray-600 mt-3 text-base sm:text-lg leading-7">
+            Upload verified iPhones, Androids,
+            laptops, consoles and trade-in devices.
           </p>
 
         </div>
 
-        <div className="space-y-5">
+        <div className="space-y-6">
 
           {/* DEALER INFO */}
+          <div className="bg-gray-50 p-5 sm:p-6 rounded-3xl">
 
-          <div className="bg-gray-50 p-6 rounded-2xl">
-
-            <h2 className="text-2xl font-bold mb-5">
+            <h2 className="text-2xl font-bold text-black mb-5">
               Dealer Information
             </h2>
 
@@ -138,42 +142,49 @@ export default function AddProductPage() {
               <input
                 type="text"
                 placeholder="Dealer / Shop Name"
-                className="w-full border p-4 rounded-xl"
+                className="w-full border border-gray-300 p-4 rounded-2xl bg-white text-black placeholder:text-gray-500 outline-none focus:border-black"
                 value={sellerName}
-                onChange={(e) => setSellerName(e.target.value)}
+                onChange={(e) =>
+                  setSellerName(e.target.value)
+                }
               />
 
               <input
                 type="text"
                 placeholder="Dealer Slug (example: iphone-hub)"
-                className="w-full border p-4 rounded-xl"
+                className="w-full border border-gray-300 p-4 rounded-2xl bg-white text-black placeholder:text-gray-500 outline-none focus:border-black"
                 value={dealerSlug}
-                onChange={(e) => setDealerSlug(e.target.value)}
+                onChange={(e) =>
+                  setDealerSlug(e.target.value)
+                }
               />
 
               <input
-  type="tel"
-  placeholder="Seller Phone (2547XXXXXXXX)"
-  className="w-full border p-4 rounded-xl"
-  value={sellerPhone}
-  maxLength={12}
-  onChange={(e) => {
+                type="tel"
+                placeholder="Seller Phone (2547XXXXXXXX)"
+                className="w-full border border-gray-300 p-4 rounded-2xl bg-white text-black placeholder:text-gray-500 outline-none focus:border-black"
+                value={sellerPhone}
+                maxLength={12}
+                onChange={(e) => {
 
-    const numbersOnly =
-      e.target.value.replace(/\D/g, '')
+                  const numbersOnly =
+                    e.target.value.replace(/\D/g, '')
 
-    if (numbersOnly.length <= 12) {
-      setSellerPhone(numbersOnly)
-    }
+                  if (numbersOnly.length <= 12) {
+                    setSellerPhone(numbersOnly)
+                  }
 
-  }}
-/>
+                }}
+              />
+
               <input
                 type="text"
                 placeholder="Shop Location"
-                className="w-full border p-4 rounded-xl"
+                className="w-full border border-gray-300 p-4 rounded-2xl bg-white text-black placeholder:text-gray-500 outline-none focus:border-black"
                 value={sellerLocation}
-                onChange={(e) => setSellerLocation(e.target.value)}
+                onChange={(e) =>
+                  setSellerLocation(e.target.value)
+                }
               />
 
             </div>
@@ -181,10 +192,9 @@ export default function AddProductPage() {
           </div>
 
           {/* PRODUCT INFO */}
+          <div className="bg-gray-50 p-5 sm:p-6 rounded-3xl">
 
-          <div className="bg-gray-50 p-6 rounded-2xl">
-
-            <h2 className="text-2xl font-bold mb-5">
+            <h2 className="text-2xl font-bold text-black mb-5">
               Product Information
             </h2>
 
@@ -193,79 +203,98 @@ export default function AddProductPage() {
               <input
                 type="text"
                 placeholder="Product name"
-                className="w-full border p-4 rounded-xl"
+                className="w-full border border-gray-300 p-4 rounded-2xl bg-white text-black placeholder:text-gray-500 outline-none focus:border-black"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) =>
+                  setName(e.target.value)
+                }
               />
 
               <input
                 type="number"
                 placeholder="Price"
-                className="w-full border p-4 rounded-xl"
+                className="w-full border border-gray-300 p-4 rounded-2xl bg-white text-black placeholder:text-gray-500 outline-none focus:border-black"
                 value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                onChange={(e) =>
+                  setPrice(e.target.value)
+                }
               />
 
               <input
                 type="text"
                 placeholder="Condition (New / Used / Refurbished)"
-                className="w-full border p-4 rounded-xl"
+                className="w-full border border-gray-300 p-4 rounded-2xl bg-white text-black placeholder:text-gray-500 outline-none focus:border-black"
                 value={condition}
-                onChange={(e) => setCondition(e.target.value)}
+                onChange={(e) =>
+                  setCondition(e.target.value)
+                }
               />
 
               <input
                 type="text"
                 placeholder="Storage"
-                className="w-full border p-4 rounded-xl"
+                className="w-full border border-gray-300 p-4 rounded-2xl bg-white text-black placeholder:text-gray-500 outline-none focus:border-black"
                 value={storage}
-                onChange={(e) => setStorage(e.target.value)}
+                onChange={(e) =>
+                  setStorage(e.target.value)
+                }
               />
 
               <input
                 type="text"
                 placeholder="RAM"
-                className="w-full border p-4 rounded-xl"
+                className="w-full border border-gray-300 p-4 rounded-2xl bg-white text-black placeholder:text-gray-500 outline-none focus:border-black"
                 value={ram}
-                onChange={(e) => setRam(e.target.value)}
+                onChange={(e) =>
+                  setRam(e.target.value)
+                }
               />
 
               <input
                 type="text"
                 placeholder="Warranty"
-                className="w-full border p-4 rounded-xl"
+                className="w-full border border-gray-300 p-4 rounded-2xl bg-white text-black placeholder:text-gray-500 outline-none focus:border-black"
                 value={warranty}
-                onChange={(e) => setWarranty(e.target.value)}
+                onChange={(e) =>
+                  setWarranty(e.target.value)
+                }
               />
 
               <input
                 type="text"
                 placeholder="Battery Health"
-                className="w-full border p-4 rounded-xl"
+                className="w-full border border-gray-300 p-4 rounded-2xl bg-white text-black placeholder:text-gray-500 outline-none focus:border-black"
                 value={batteryHealth}
-                onChange={(e) => setBatteryHealth(e.target.value)}
+                onChange={(e) =>
+                  setBatteryHealth(e.target.value)
+                }
               />
 
               <input
                 type="file"
-                className="w-full border p-4 rounded-xl bg-white"
-                onChange={(e) => setImageFile(e.target.files[0])}
+                className="w-full border border-gray-300 p-4 rounded-2xl bg-white text-black file:mr-4 file:px-4 file:py-2 file:border-0 file:rounded-xl file:bg-black file:text-white"
+                onChange={(e) =>
+                  setImageFile(e.target.files[0])
+                }
               />
 
               <textarea
                 placeholder="Description"
-                className="w-full border p-4 rounded-xl h-40"
+                className="w-full border border-gray-300 p-4 rounded-2xl h-40 bg-white text-black placeholder:text-gray-500 outline-none focus:border-black resize-none"
                 value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                onChange={(e) =>
+                  setDescription(e.target.value)
+                }
               />
 
             </div>
 
           </div>
 
+          {/* BUTTON */}
           <button
             onClick={addProduct}
-            className="w-full bg-black text-white py-5 rounded-2xl text-lg hover:bg-gray-800 transition"
+            className="w-full bg-black text-white py-5 rounded-2xl text-lg hover:bg-gray-800 transition font-semibold"
           >
             Upload Product
           </button>
@@ -275,5 +304,6 @@ export default function AddProductPage() {
       </div>
 
     </main>
+
   )
 }

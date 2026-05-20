@@ -35,7 +35,7 @@ export default function TradeInsPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-100 p-4 md:p-10">
+    <main className="min-h-screen bg-gray-100 px-4 py-6 md:px-10 md:py-10 overflow-x-hidden">
 
       <div className="max-w-7xl mx-auto">
 
@@ -44,7 +44,7 @@ export default function TradeInsPage() {
 
           <Link href="/dashboard">
 
-            <button className="bg-black text-white px-6 py-3 rounded-2xl hover:bg-gray-800 transition">
+            <button className="bg-black text-white px-6 py-3 rounded-2xl hover:bg-gray-800 transition font-semibold">
               ← Back To Dashboard
             </button>
 
@@ -55,11 +55,11 @@ export default function TradeInsPage() {
         {/* HEADER */}
         <div className="mb-10">
 
-          <h1 className="text-5xl font-bold">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-black">
             Trade-In Requests
           </h1>
 
-          <p className="text-gray-600 mt-3 text-xl">
+          <p className="text-gray-700 mt-3 text-base sm:text-lg lg:text-xl">
             Review customer exchange requests
           </p>
 
@@ -70,11 +70,11 @@ export default function TradeInsPage() {
 
           <div className="bg-white rounded-3xl p-10 shadow-sm text-center">
 
-            <h2 className="text-3xl font-bold">
+            <h2 className="text-2xl sm:text-3xl font-bold text-black">
               No Trade-In Requests Yet
             </h2>
 
-            <p className="text-gray-500 mt-4">
+            <p className="text-gray-600 mt-4">
               Customer requests will appear here.
             </p>
 
@@ -88,18 +88,18 @@ export default function TradeInsPage() {
 
               <div
                 key={trade.id}
-                className="bg-white rounded-3xl p-6 shadow-sm"
+                className="bg-white rounded-3xl p-5 sm:p-6 shadow-sm"
               >
 
                 <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
 
                   <div>
 
-                    <h2 className="text-3xl font-bold">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-black break-words">
                       {trade.device_name}
                     </h2>
 
-                    <p className="text-gray-500 mt-2">
+                    <p className="text-gray-700 mt-2 break-words">
                       Submitted by {trade.customer_name}
                     </p>
 
@@ -107,13 +107,15 @@ export default function TradeInsPage() {
 
                   <div>
 
-                    <span className={`px-4 py-2 rounded-full text-sm font-semibold ${
-                      trade.status === 'Approved'
-                        ? 'bg-green-100 text-green-700'
-                        : trade.status === 'Rejected'
-                        ? 'bg-red-100 text-red-700'
-                        : 'bg-yellow-100 text-yellow-700'
-                    }`}>
+                    <span
+                      className={`px-4 py-2 rounded-full text-sm font-semibold ${
+                        trade.status === 'Approved'
+                          ? 'bg-green-100 text-green-700'
+                          : trade.status === 'Rejected'
+                          ? 'bg-red-100 text-red-700'
+                          : 'bg-yellow-100 text-yellow-700'
+                      }`}
+                    >
                       {trade.status}
                     </span>
 
@@ -121,15 +123,15 @@ export default function TradeInsPage() {
 
                 </div>
 
-                <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-5 mt-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mt-8">
 
                   <div className="bg-gray-50 p-5 rounded-2xl">
 
-                    <p className="text-gray-500 text-sm">
+                    <p className="text-gray-600 text-sm">
                       Customer Phone
                     </p>
 
-                    <h3 className="font-bold text-lg mt-2">
+                    <h3 className="font-bold text-base sm:text-lg mt-2 text-black break-words">
                       {trade.customer_phone}
                     </h3>
 
@@ -137,11 +139,11 @@ export default function TradeInsPage() {
 
                   <div className="bg-gray-50 p-5 rounded-2xl">
 
-                    <p className="text-gray-500 text-sm">
+                    <p className="text-gray-600 text-sm">
                       Storage
                     </p>
 
-                    <h3 className="font-bold text-lg mt-2">
+                    <h3 className="font-bold text-base sm:text-lg mt-2 text-black">
                       {trade.storage}
                     </h3>
 
@@ -149,11 +151,11 @@ export default function TradeInsPage() {
 
                   <div className="bg-gray-50 p-5 rounded-2xl">
 
-                    <p className="text-gray-500 text-sm">
+                    <p className="text-gray-600 text-sm">
                       Condition
                     </p>
 
-                    <h3 className="font-bold text-lg mt-2">
+                    <h3 className="font-bold text-base sm:text-lg mt-2 text-black">
                       {trade.condition}
                     </h3>
 
@@ -161,11 +163,11 @@ export default function TradeInsPage() {
 
                   <div className="bg-gray-50 p-5 rounded-2xl">
 
-                    <p className="text-gray-500 text-sm">
+                    <p className="text-gray-600 text-sm">
                       Expected Price
                     </p>
 
-                    <h3 className="font-bold text-lg mt-2">
+                    <h3 className="font-bold text-base sm:text-lg mt-2 text-black break-words">
                       KES {trade.expected_price}
                     </h3>
 
@@ -175,11 +177,11 @@ export default function TradeInsPage() {
 
                 <div className="bg-gray-50 p-5 rounded-2xl mt-6">
 
-                  <p className="text-gray-500 text-sm">
+                  <p className="text-gray-600 text-sm">
                     Description
                   </p>
 
-                  <p className="mt-3 text-lg text-gray-700">
+                  <p className="mt-3 text-base sm:text-lg text-black leading-7 break-words">
                     {trade.description}
                   </p>
 
@@ -191,7 +193,7 @@ export default function TradeInsPage() {
                     onClick={() =>
                       updateStatus(trade.id, 'Approved')
                     }
-                    className="bg-black text-white px-6 py-3 rounded-2xl"
+                    className="bg-black text-white px-6 py-3 rounded-2xl hover:bg-gray-800 transition font-semibold"
                   >
                     Approve
                   </button>
@@ -200,7 +202,7 @@ export default function TradeInsPage() {
                     onClick={() =>
                       updateStatus(trade.id, 'Rejected')
                     }
-                    className="bg-red-100 text-red-700 px-6 py-3 rounded-2xl"
+                    className="bg-red-100 text-red-700 px-6 py-3 rounded-2xl hover:bg-red-200 transition font-semibold"
                   >
                     Reject
                   </button>
