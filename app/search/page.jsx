@@ -1,11 +1,6 @@
 'use client'
 
-import {
-  Suspense,
-  useEffect,
-  useState
-} from 'react'
-
+import { Suspense, useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { supabase } from '../../lib/supabase'
@@ -45,19 +40,23 @@ function SearchContent() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-100 px-4 sm:px-6 lg:px-10 py-8 lg:py-10">
+    <main className="min-h-screen bg-gray-100 px-4 sm:px-6 lg:px-10 py-8 overflow-x-hidden">
 
       <div className="max-w-7xl mx-auto">
 
         {/* HEADER */}
         <div className="mb-10">
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold break-words">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-black break-words">
             Search Results
           </h1>
 
-          <p className="text-gray-500 mt-3 text-base sm:text-lg break-words">
-            Showing results for "{query}"
+          <p className="text-gray-600 mt-3 text-base sm:text-lg break-words">
+            Showing results for "
+            <span className="font-semibold text-black">
+              {query}
+            </span>
+            "
           </p>
 
         </div>
@@ -67,7 +66,7 @@ function SearchContent() {
 
           <div className="bg-white rounded-3xl p-10 sm:p-16 text-center shadow-sm">
 
-            <h2 className="text-2xl sm:text-3xl font-bold">
+            <h2 className="text-2xl sm:text-3xl font-bold text-black">
               Loading Products...
             </h2>
 
@@ -77,12 +76,12 @@ function SearchContent() {
 
           <div className="bg-white rounded-3xl p-10 sm:p-16 text-center shadow-sm">
 
-            <h2 className="text-2xl sm:text-3xl font-bold">
+            <h2 className="text-3xl font-bold text-black">
               No products found
             </h2>
 
             <p className="text-gray-500 mt-4 text-base sm:text-lg">
-              Try another search keyword.
+              Try searching another device.
             </p>
 
           </div>
@@ -98,7 +97,7 @@ function SearchContent() {
                 key={product.id}
               >
 
-                <div className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-1 transition duration-300 cursor-pointer h-full">
+                <div className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-1 transition duration-300 h-full">
 
                   {/* IMAGE */}
                   <div className="relative">
@@ -106,15 +105,13 @@ function SearchContent() {
                     <img
                       src={product.image_url}
                       alt={product.name}
-                      className="w-full h-60 sm:h-64 object-cover"
+                      className="w-full h-56 sm:h-64 object-cover"
                     />
 
                     {product.dealer_verified && (
 
                       <div className="absolute top-4 right-4 bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full font-semibold">
-
                         VERIFIED
-
                       </div>
 
                     )}
@@ -124,24 +121,28 @@ function SearchContent() {
                   {/* CONTENT */}
                   <div className="p-5">
 
-                    <h2 className="text-xl sm:text-2xl font-bold line-clamp-1">
+                    <h2 className="text-xl sm:text-2xl font-bold text-black line-clamp-1">
                       {product.name}
                     </h2>
 
-                    <p className="text-gray-500 mt-2 text-sm sm:text-base">
-                      {product.storage}
-                    </p>
-
-                    <h3 className="text-2xl sm:text-3xl font-bold mt-4">
+                    <p className="text-2xl font-bold mt-4 text-black">
                       KES {product.price}
-                    </h3>
+                    </p>
 
                     {/* SPECS */}
                     <div className="flex flex-wrap gap-2 mt-4">
 
+                      {product.storage && (
+
+                        <div className="bg-gray-200 text-black px-3 py-1 rounded-full text-sm font-medium">
+                          {product.storage}
+                        </div>
+
+                      )}
+
                       {product.ram && (
 
-                        <div className="bg-gray-100 px-3 py-1 rounded-full text-sm">
+                        <div className="bg-gray-200 text-black px-3 py-1 rounded-full text-sm font-medium">
                           {product.ram}
                         </div>
 
@@ -149,7 +150,7 @@ function SearchContent() {
 
                       {product.condition && (
 
-                        <div className="bg-gray-100 px-3 py-1 rounded-full text-sm capitalize">
+                        <div className="bg-gray-200 text-black px-3 py-1 rounded-full text-sm font-medium capitalize">
                           {product.condition}
                         </div>
 
@@ -164,17 +165,15 @@ function SearchContent() {
                         Sold by
                       </p>
 
-                      <h3 className="font-bold mt-1">
-                        {product.seller_name}
+                      <h3 className="font-bold text-black mt-1 line-clamp-1">
+                        {product.seller_name || 'Verified Dealer'}
                       </h3>
 
                     </div>
 
                     {/* BUTTON */}
-                    <button className="w-full bg-black text-white py-3 rounded-2xl mt-6 hover:bg-gray-800 transition font-semibold">
-
+                    <button className="w-full bg-black text-white py-4 rounded-2xl mt-6 hover:bg-gray-800 transition font-semibold">
                       View Device
-
                     </button>
 
                   </div>
@@ -198,26 +197,8 @@ function SearchContent() {
 export default function SearchPage() {
 
   return (
-    <Suspense
-      fallback={
-
-        <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-
-          <div className="bg-white rounded-3xl p-10 shadow-sm">
-
-            <h2 className="text-2xl font-bold">
-              Loading...
-            </h2>
-
-          </div>
-
-        </div>
-
-      }
-    >
-
+    <Suspense fallback={<div>Loading...</div>}>
       <SearchContent />
-
     </Suspense>
   )
 }

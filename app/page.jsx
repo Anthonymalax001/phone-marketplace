@@ -152,7 +152,7 @@ export default function HomePage() {
 
                 </div>
 
-                <div className="bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full whitespace-nowrap">
+                <div className="bg-green-200 text-green-900 text-xs px-3 py-1 rounded-full whitespace-nowrap font-semibold">
                   VERIFIED
                 </div>
 
@@ -183,11 +183,11 @@ export default function HomePage() {
 
             <div>
 
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-black">
                 Featured Products
               </h2>
 
-              <p className="text-gray-500 mt-3 text-base lg:text-lg">
+              <p className="text-gray-600 mt-3 text-base lg:text-lg">
                 Verified devices from trusted dealers
               </p>
 
@@ -195,7 +195,7 @@ export default function HomePage() {
 
             <Link href="/search?q=iphone">
 
-              <button className="w-full sm:w-auto border border-black px-6 py-3 rounded-2xl hover:bg-black hover:text-white transition">
+              <button className="w-full sm:w-auto border border-black px-6 py-3 rounded-2xl hover:bg-black hover:text-white transition text-black">
                 Explore Marketplace
               </button>
 
@@ -208,7 +208,7 @@ export default function HomePage() {
 
             <div className="bg-white rounded-3xl p-10 sm:p-16 text-center">
 
-              <h2 className="text-2xl sm:text-3xl font-bold">
+              <h2 className="text-2xl sm:text-3xl font-bold text-black">
                 Loading Products...
               </h2>
 
@@ -218,11 +218,11 @@ export default function HomePage() {
 
             <div className="bg-white rounded-3xl p-10 sm:p-16 text-center">
 
-              <h2 className="text-3xl sm:text-4xl font-bold">
+              <h2 className="text-3xl sm:text-4xl font-bold text-black">
                 No Products Found
               </h2>
 
-              <p className="text-gray-500 mt-4 text-base sm:text-lg">
+              <p className="text-gray-600 mt-4 text-base sm:text-lg">
                 Add products from the dashboard.
               </p>
 
@@ -250,7 +250,7 @@ export default function HomePage() {
 
                     {product.dealer_verified && (
 
-                      <div className="absolute top-4 right-4 bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full font-semibold">
+                      <div className="absolute top-4 right-4 bg-green-200 text-green-900 text-xs px-3 py-1 rounded-full font-semibold">
                         VERIFIED
                       </div>
 
@@ -261,26 +261,26 @@ export default function HomePage() {
                   {/* CONTENT */}
                   <div className="p-5">
 
-                    <h2 className="text-xl sm:text-2xl font-bold line-clamp-1">
+                    <h2 className="text-xl sm:text-2xl font-bold text-black line-clamp-1">
                       {product.name}
                     </h2>
 
-                    <p className="text-2xl font-bold mt-4">
+                    <p className="text-2xl font-bold mt-4 text-black">
                       KES {product.price}
                     </p>
 
                     {/* SPECS */}
                     <div className="flex flex-wrap gap-2 mt-4">
 
-                      <div className="bg-gray-100 px-3 py-1 rounded-full text-sm">
+                      <div className="bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">
                         {product.storage}
                       </div>
 
-                      <div className="bg-gray-100 px-3 py-1 rounded-full text-sm">
+                      <div className="bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">
                         {product.ram}
                       </div>
 
-                      <div className="bg-gray-100 px-3 py-1 rounded-full text-sm capitalize">
+                      <div className="bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm font-medium capitalize">
                         {product.condition}
                       </div>
 
@@ -289,7 +289,7 @@ export default function HomePage() {
                     {/* DEALER */}
                     <div className="mt-5">
 
-                      <p className="text-gray-500 text-sm">
+                      <p className="text-gray-700 text-sm font-medium">
                         Sold by
                       </p>
 
@@ -297,7 +297,7 @@ export default function HomePage() {
                         href={`/dealer/${product.dealer_slug}`}
                       >
 
-                        <h3 className="font-bold hover:underline cursor-pointer mt-1 line-clamp-1">
+                        <h3 className="font-bold text-black hover:underline cursor-pointer mt-1 line-clamp-1">
                           {product.seller_name}
                         </h3>
 

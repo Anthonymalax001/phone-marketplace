@@ -48,7 +48,7 @@ export default function Navbar() {
 
   return (
 
-    <nav className="bg-white/95 border-b sticky top-0 z-50 backdrop-blur-lg">
+    <nav className="bg-white border-b sticky top-0 z-50">
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
 
@@ -77,12 +77,12 @@ export default function Navbar() {
                 type="text"
                 name="q"
                 placeholder="Search iPhones, Samsung, PS5..."
-                className="w-full border rounded-2xl px-5 py-3 pr-14 outline-none focus:border-black bg-gray-50 text-black placeholder:text-gray-400"
+                className="w-full border-2 border-gray-300 rounded-2xl px-5 py-3 pr-14 outline-none focus:border-black bg-white text-black placeholder:text-gray-600"
               />
 
               <button
                 type="submit"
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-700"
               >
 
                 <Search size={20} />
@@ -99,7 +99,7 @@ export default function Navbar() {
             {/* TRADE IN */}
             <Link href="/trade-in">
 
-              <button className="flex items-center gap-2 border px-3 sm:px-4 py-3 rounded-2xl hover:bg-gray-100 transition font-semibold whitespace-nowrap text-sm sm:text-base">
+              <button className="flex items-center gap-2 border border-gray-300 px-3 sm:px-4 py-3 rounded-2xl hover:bg-gray-100 transition font-semibold whitespace-nowrap text-sm sm:text-base text-black bg-white">
 
                 <Repeat size={17} />
 
@@ -125,9 +125,12 @@ export default function Navbar() {
 
               <div className="relative cursor-pointer">
 
-                <div className="border p-3 rounded-2xl hover:bg-gray-100 transition bg-white">
+                <div className="border border-gray-300 p-3 rounded-2xl hover:bg-gray-100 transition bg-white">
 
-                  <ShoppingCart size={22} />
+                  <ShoppingCart
+                    size={22}
+                    className="text-black"
+                  />
 
                 </div>
 
@@ -162,12 +165,12 @@ export default function Navbar() {
               type="text"
               name="q"
               placeholder="Search phones..."
-              className="w-full border rounded-2xl px-5 py-3 pr-14 outline-none focus:border-black bg-gray-50 text-black placeholder:text-gray-400"
+              className="w-full border-2 border-gray-300 rounded-2xl px-5 py-3 pr-14 outline-none focus:border-black bg-white text-black placeholder:text-gray-600"
             />
 
             <button
               type="submit"
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-700"
             >
 
               <Search size={20} />
