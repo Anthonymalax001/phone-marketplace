@@ -50,7 +50,7 @@ export default function Navbar() {
 
     <nav className="bg-white border-b sticky top-0 z-50">
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 py-4">
 
         {/* TOP NAV */}
         <div className="flex items-center justify-between gap-2">
@@ -99,9 +99,9 @@ export default function Navbar() {
             {/* TRADE IN */}
             <Link href="/trade-in">
 
-              <button className="flex items-center gap-1 border border-gray-300 px-3 sm:px-4 py-3 rounded-2xl hover:bg-gray-100 transition font-semibold whitespace-nowrap text-xs sm:text-base text-black bg-white">
+              <button className="flex items-center gap-1 border border-gray-300 px-2 sm:px-4 py-3 rounded-2xl hover:bg-gray-100 transition font-semibold whitespace-nowrap text-xs sm:text-base text-black bg-white">
 
-                <Repeat size={16} />
+                <Repeat size={15} />
 
                 <span>
                   Trade-In
@@ -114,7 +114,7 @@ export default function Navbar() {
             {/* DEALER LOGIN */}
             <Link href="/auth">
 
-              <button className="bg-black text-white px-4 sm:px-5 py-3 rounded-2xl hover:bg-gray-800 transition font-semibold text-xs sm:text-base whitespace-nowrap">
+              <button className="bg-black text-white px-3 sm:px-5 py-3 rounded-2xl hover:bg-gray-800 transition font-semibold text-xs sm:text-base whitespace-nowrap">
                 Dealer Login
               </button>
 
@@ -128,7 +128,7 @@ export default function Navbar() {
                 <div className="border border-gray-300 p-3 rounded-2xl hover:bg-gray-100 transition bg-white">
 
                   <ShoppingCart
-                    size={22}
+                    size={20}
                     className="text-black"
                   />
 

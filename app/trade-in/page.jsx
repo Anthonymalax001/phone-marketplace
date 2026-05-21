@@ -23,7 +23,6 @@ export default function TradeInPage() {
 
     let value = e.target.value
 
-    // PHONE VALIDATION
     if (e.target.name === 'customer_phone') {
 
       value = value.replace(/\D/g, '')
@@ -120,11 +119,12 @@ export default function TradeInPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-100 px-4 sm:px-6 lg:px-10 py-6 lg:py-10 overflow-x-hidden">
+
+    <main className="min-h-screen bg-gray-100 px-4 py-6 md:px-10 md:py-10">
 
       <div className="max-w-4xl mx-auto">
 
-        <div className="bg-white rounded-3xl shadow-sm p-5 sm:p-8 lg:p-10">
+        <div className="bg-white rounded-3xl shadow-sm p-6 md:p-10 border border-gray-200">
 
           {/* HEADER */}
           <div className="mb-10">
@@ -133,222 +133,151 @@ export default function TradeInPage() {
               TRADE-IN PROGRAM
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
+            <h1 className="text-4xl md:text-5xl font-bold text-black">
               Trade-In Your Device
             </h1>
 
-            <p className="text-gray-500 mt-4 text-base sm:text-lg leading-7">
+            <p className="text-gray-700 mt-4 text-lg">
               Exchange your old phone, laptop or console for a better deal.
             </p>
 
           </div>
 
-          {/* FORM */}
           <form
             onSubmit={submitTradeIn}
             className="space-y-8"
           >
 
-            {/* CUSTOMER INFO */}
-            <div className="bg-gray-50 rounded-3xl p-5 sm:p-6">
+            {/* CUSTOMER */}
+            <div className="bg-gray-50 border border-gray-200 rounded-3xl p-6">
 
-              <h2 className="text-2xl font-bold mb-6">
+              <h2 className="text-2xl font-bold text-black mb-6">
                 Customer Information
               </h2>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="grid md:grid-cols-2 gap-5">
 
-                <div>
+                <input
+                  type="text"
+                  name="customer_name"
+                  placeholder="Your Name"
+                  value={form.customer_name}
+                  onChange={handleChange}
+                  required
+                  className="w-full border border-gray-300 bg-white text-black placeholder:text-gray-500 px-5 py-4 rounded-2xl outline-none focus:border-black"
+                />
 
-                  <label className="block text-sm font-semibold mb-2">
-                    Full Name
-                  </label>
-
-                  <input
-                    type="text"
-                    name="customer_name"
-                    placeholder="Your Name"
-                    value={form.customer_name}
-                    onChange={handleChange}
-                    required
-                    className="w-full border border-gray-200 bg-white px-5 py-4 rounded-2xl outline-none focus:border-black transition"
-                  />
-
-                </div>
-
-                <div>
-
-                  <label className="block text-sm font-semibold mb-2">
-                    Phone Number
-                  </label>
-
-                  <input
-                    type="text"
-                    name="customer_phone"
-                    placeholder="07XXXXXXXX"
-                    value={form.customer_phone}
-                    onChange={handleChange}
-                    required
-                    className="w-full border border-gray-200 bg-white px-5 py-4 rounded-2xl outline-none focus:border-black transition"
-                  />
-
-                  <p className="text-xs text-gray-500 mt-2">
-                    Must be exactly 10 digits
-                  </p>
-
-                </div>
+                <input
+                  type="text"
+                  name="customer_phone"
+                  placeholder="07XXXXXXXX"
+                  value={form.customer_phone}
+                  onChange={handleChange}
+                  required
+                  className="w-full border border-gray-300 bg-white text-black placeholder:text-gray-500 px-5 py-4 rounded-2xl outline-none focus:border-black"
+                />
 
               </div>
 
             </div>
 
-            {/* DEVICE INFO */}
-            <div className="bg-gray-50 rounded-3xl p-5 sm:p-6">
+            {/* DEVICE */}
+            <div className="bg-gray-50 border border-gray-200 rounded-3xl p-6">
 
-              <h2 className="text-2xl font-bold mb-6">
+              <h2 className="text-2xl font-bold text-black mb-6">
                 Device Information
               </h2>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="grid md:grid-cols-2 gap-5">
 
-                <div>
-
-                  <label className="block text-sm font-semibold mb-2">
-                    Device Name
-                  </label>
-
-                  <input
-                    type="text"
-                    name="device_name"
-                    placeholder="iPhone 13 Pro Max"
-                    value={form.device_name}
-                    onChange={handleChange}
-                    required
-                    className="w-full border border-gray-200 bg-white px-5 py-4 rounded-2xl outline-none focus:border-black transition"
-                  />
-
-                </div>
-
-                <div>
-
-                  <label className="block text-sm font-semibold mb-2">
-                    Storage
-                  </label>
-
-                  <input
-                    type="text"
-                    name="storage"
-                    placeholder="128GB"
-                    value={form.storage}
-                    onChange={handleChange}
-                    className="w-full border border-gray-200 bg-white px-5 py-4 rounded-2xl outline-none focus:border-black transition"
-                  />
-
-                </div>
-
-                <div>
-
-                  <label className="block text-sm font-semibold mb-2">
-                    Condition
-                  </label>
-
-                  <input
-                    type="text"
-                    name="condition"
-                    placeholder="Excellent"
-                    value={form.condition}
-                    onChange={handleChange}
-                    className="w-full border border-gray-200 bg-white px-5 py-4 rounded-2xl outline-none focus:border-black transition"
-                  />
-
-                </div>
-
-                <div>
-
-                  <label className="block text-sm font-semibold mb-2">
-                    Expected Price
-                  </label>
-
-                  <input
-                    type="text"
-                    name="expected_price"
-                    placeholder="KES 85000"
-                    value={form.expected_price}
-                    onChange={handleChange}
-                    className="w-full border border-gray-200 bg-white px-5 py-4 rounded-2xl outline-none focus:border-black transition"
-                  />
-
-                </div>
-
-              </div>
-
-              {/* DESCRIPTION */}
-              <div className="mt-5">
-
-                <label className="block text-sm font-semibold mb-2">
-                  Device Description
-                </label>
-
-                <textarea
-                  name="description"
-                  placeholder="Describe the device condition, scratches, battery health, accessories included..."
-                  value={form.description}
+                <input
+                  type="text"
+                  name="device_name"
+                  placeholder="iPhone 13 Pro Max"
+                  value={form.device_name}
                   onChange={handleChange}
-                  rows={6}
-                  className="w-full border border-gray-200 bg-white px-5 py-4 rounded-2xl outline-none focus:border-black transition resize-none"
+                  required
+                  className="w-full border border-gray-300 bg-white text-black placeholder:text-gray-500 px-5 py-4 rounded-2xl outline-none focus:border-black"
+                />
+
+                <input
+                  type="text"
+                  name="storage"
+                  placeholder="128GB"
+                  value={form.storage}
+                  onChange={handleChange}
+                  className="w-full border border-gray-300 bg-white text-black placeholder:text-gray-500 px-5 py-4 rounded-2xl outline-none focus:border-black"
+                />
+
+                <input
+                  type="text"
+                  name="condition"
+                  placeholder="Excellent"
+                  value={form.condition}
+                  onChange={handleChange}
+                  className="w-full border border-gray-300 bg-white text-black placeholder:text-gray-500 px-5 py-4 rounded-2xl outline-none focus:border-black"
+                />
+
+                <input
+                  type="text"
+                  name="expected_price"
+                  placeholder="KES 85000"
+                  value={form.expected_price}
+                  onChange={handleChange}
+                  className="w-full border border-gray-300 bg-white text-black placeholder:text-gray-500 px-5 py-4 rounded-2xl outline-none focus:border-black"
                 />
 
               </div>
+
+              <textarea
+                name="description"
+                placeholder="Describe the device..."
+                value={form.description}
+                onChange={handleChange}
+                rows={6}
+                className="w-full mt-5 border border-gray-300 bg-white text-black placeholder:text-gray-500 px-5 py-4 rounded-2xl outline-none focus:border-black resize-none"
+              />
 
             </div>
 
             {/* IMAGE */}
-            <div className="bg-gray-50 rounded-3xl p-5 sm:p-6">
+            <div className="bg-gray-50 border border-gray-200 rounded-3xl p-6">
 
-              <h2 className="text-2xl font-bold mb-6">
-                Device Images
+              <h2 className="text-2xl font-bold text-black mb-6">
+                Device Image
               </h2>
 
-              <div className="border-2 border-dashed border-gray-300 rounded-3xl p-6 bg-white">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={uploadImage}
+                className="w-full border border-gray-300 bg-white p-4 rounded-2xl text-black"
+              />
 
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={uploadImage}
-                  className="w-full text-sm"
+              {imageUploading && (
+
+                <p className="mt-4 text-blue-700 font-medium">
+                  Uploading image...
+                </p>
+
+              )}
+
+              {form.image_url && (
+
+                <img
+                  src={form.image_url}
+                  alt="Preview"
+                  className="w-full h-72 object-cover rounded-3xl mt-6"
                 />
 
-                {imageUploading && (
-
-                  <div className="mt-5 bg-blue-50 text-blue-700 px-4 py-3 rounded-2xl font-medium">
-                    Uploading image...
-                  </div>
-
-                )}
-
-                {form.image_url && (
-
-                  <div className="mt-6">
-
-                    <img
-                      src={form.image_url}
-                      alt="Preview"
-                      className="w-full h-[250px] sm:h-[350px] object-cover rounded-3xl"
-                    />
-
-                  </div>
-
-                )}
-
-              </div>
+              )}
 
             </div>
 
-            {/* BUTTON */}
             <button
               type="submit"
               disabled={loading || imageUploading}
-              className="w-full bg-black text-white py-5 rounded-2xl text-base sm:text-lg font-semibold hover:bg-gray-800 transition disabled:opacity-50"
+              className="w-full bg-black text-white py-5 rounded-2xl text-lg font-semibold hover:bg-gray-800 transition"
             >
 
               {loading
@@ -364,5 +293,6 @@ export default function TradeInPage() {
       </div>
 
     </main>
+
   )
 }
