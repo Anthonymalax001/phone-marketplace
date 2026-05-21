@@ -23,7 +23,7 @@ export default function TradeInPage() {
 
     let value = e.target.value
 
-    // FORCE PHONE TO 10 DIGITS
+    // PHONE VALIDATION
     if (e.target.name === 'customer_phone') {
 
       value = value.replace(/\D/g, '')
@@ -79,11 +79,13 @@ export default function TradeInPage() {
     e.preventDefault()
 
     if (form.customer_phone.length !== 10) {
+
       alert('Phone number must be exactly 10 digits')
       return
     }
 
     if (!form.image_url) {
+
       alert('Please upload device image')
       return
     }
@@ -118,144 +120,246 @@ export default function TradeInPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-100 p-4 md:p-10">
+    <main className="min-h-screen bg-gray-100 px-4 sm:px-6 lg:px-10 py-6 lg:py-10 overflow-x-hidden">
 
-      <div className="max-w-3xl mx-auto bg-white rounded-3xl p-6 md:p-10 shadow-sm">
+      <div className="max-w-4xl mx-auto">
 
-        <div className="mb-10">
+        <div className="bg-white rounded-3xl shadow-sm p-5 sm:p-8 lg:p-10">
 
-          <h1 className="text-5xl font-bold">
-            Trade-In Your Device
-          </h1>
+          {/* HEADER */}
+          <div className="mb-10">
 
-          <p className="text-gray-500 mt-4 text-lg">
-            Exchange your old phone for a better deal.
-          </p>
+            <div className="inline-flex items-center bg-black text-white px-4 py-2 rounded-full text-sm font-semibold mb-5">
+              TRADE-IN PROGRAM
+            </div>
 
-        </div>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
+              Trade-In Your Device
+            </h1>
 
-        <form
-          onSubmit={submitTradeIn}
-          className="space-y-6"
-        >
-
-          <input
-            type="text"
-            name="customer_name"
-            placeholder="Your Name"
-            value={form.customer_name}
-            onChange={handleChange}
-            required
-            className="w-full border p-4 rounded-2xl"
-          />
-
-          <div>
-
-            <input
-              type="text"
-              name="customer_phone"
-              placeholder="07XXXXXXXX"
-              value={form.customer_phone}
-              onChange={handleChange}
-              required
-              className="w-full border p-4 rounded-2xl"
-            />
-
-            <p className="text-sm text-gray-500 mt-2">
-              Must be exactly 10 digits
+            <p className="text-gray-500 mt-4 text-base sm:text-lg leading-7">
+              Exchange your old phone, laptop or console for a better deal.
             </p>
 
           </div>
 
-          <input
-            type="text"
-            name="device_name"
-            placeholder="Device Name"
-            value={form.device_name}
-            onChange={handleChange}
-            required
-            className="w-full border p-4 rounded-2xl"
-          />
-
-          <input
-            type="text"
-            name="storage"
-            placeholder="Storage e.g 128GB"
-            value={form.storage}
-            onChange={handleChange}
-            className="w-full border p-4 rounded-2xl"
-          />
-
-          <input
-            type="text"
-            name="condition"
-            placeholder="Condition e.g Excellent"
-            value={form.condition}
-            onChange={handleChange}
-            className="w-full border p-4 rounded-2xl"
-          />
-
-          <input
-            type="text"
-            name="expected_price"
-            placeholder="Expected Price"
-            value={form.expected_price}
-            onChange={handleChange}
-            className="w-full border p-4 rounded-2xl"
-          />
-
-          <textarea
-            name="description"
-            placeholder="Describe the device condition..."
-            value={form.description}
-            onChange={handleChange}
-            rows={5}
-            className="w-full border p-4 rounded-2xl"
-          />
-
-          {/* IMAGE */}
-          <div>
-
-            <label className="block mb-3 font-semibold">
-              Upload Device Image
-            </label>
-
-            <input
-              type="file"
-              accept="image/*"
-              onChange={uploadImage}
-              className="w-full border p-4 rounded-2xl"
-            />
-
-            {imageUploading && (
-              <p className="mt-3 text-blue-600">
-                Uploading image...
-              </p>
-            )}
-
-            {form.image_url && (
-              <img
-                src={form.image_url}
-                alt="Preview"
-                className="w-full h-64 object-cover rounded-2xl mt-5"
-              />
-            )}
-
-          </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-black text-white py-4 rounded-2xl text-lg font-semibold"
+          {/* FORM */}
+          <form
+            onSubmit={submitTradeIn}
+            className="space-y-8"
           >
 
-            {loading
-              ? 'Submitting...'
-              : 'Submit Trade-In'}
+            {/* CUSTOMER INFO */}
+            <div className="bg-gray-50 rounded-3xl p-5 sm:p-6">
 
-          </button>
+              <h2 className="text-2xl font-bold mb-6">
+                Customer Information
+              </h2>
 
-        </form>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                <div>
+
+                  <label className="block text-sm font-semibold mb-2">
+                    Full Name
+                  </label>
+
+                  <input
+                    type="text"
+                    name="customer_name"
+                    placeholder="Your Name"
+                    value={form.customer_name}
+                    onChange={handleChange}
+                    required
+                    className="w-full border border-gray-200 bg-white px-5 py-4 rounded-2xl outline-none focus:border-black transition"
+                  />
+
+                </div>
+
+                <div>
+
+                  <label className="block text-sm font-semibold mb-2">
+                    Phone Number
+                  </label>
+
+                  <input
+                    type="text"
+                    name="customer_phone"
+                    placeholder="07XXXXXXXX"
+                    value={form.customer_phone}
+                    onChange={handleChange}
+                    required
+                    className="w-full border border-gray-200 bg-white px-5 py-4 rounded-2xl outline-none focus:border-black transition"
+                  />
+
+                  <p className="text-xs text-gray-500 mt-2">
+                    Must be exactly 10 digits
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            {/* DEVICE INFO */}
+            <div className="bg-gray-50 rounded-3xl p-5 sm:p-6">
+
+              <h2 className="text-2xl font-bold mb-6">
+                Device Information
+              </h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                <div>
+
+                  <label className="block text-sm font-semibold mb-2">
+                    Device Name
+                  </label>
+
+                  <input
+                    type="text"
+                    name="device_name"
+                    placeholder="iPhone 13 Pro Max"
+                    value={form.device_name}
+                    onChange={handleChange}
+                    required
+                    className="w-full border border-gray-200 bg-white px-5 py-4 rounded-2xl outline-none focus:border-black transition"
+                  />
+
+                </div>
+
+                <div>
+
+                  <label className="block text-sm font-semibold mb-2">
+                    Storage
+                  </label>
+
+                  <input
+                    type="text"
+                    name="storage"
+                    placeholder="128GB"
+                    value={form.storage}
+                    onChange={handleChange}
+                    className="w-full border border-gray-200 bg-white px-5 py-4 rounded-2xl outline-none focus:border-black transition"
+                  />
+
+                </div>
+
+                <div>
+
+                  <label className="block text-sm font-semibold mb-2">
+                    Condition
+                  </label>
+
+                  <input
+                    type="text"
+                    name="condition"
+                    placeholder="Excellent"
+                    value={form.condition}
+                    onChange={handleChange}
+                    className="w-full border border-gray-200 bg-white px-5 py-4 rounded-2xl outline-none focus:border-black transition"
+                  />
+
+                </div>
+
+                <div>
+
+                  <label className="block text-sm font-semibold mb-2">
+                    Expected Price
+                  </label>
+
+                  <input
+                    type="text"
+                    name="expected_price"
+                    placeholder="KES 85000"
+                    value={form.expected_price}
+                    onChange={handleChange}
+                    className="w-full border border-gray-200 bg-white px-5 py-4 rounded-2xl outline-none focus:border-black transition"
+                  />
+
+                </div>
+
+              </div>
+
+              {/* DESCRIPTION */}
+              <div className="mt-5">
+
+                <label className="block text-sm font-semibold mb-2">
+                  Device Description
+                </label>
+
+                <textarea
+                  name="description"
+                  placeholder="Describe the device condition, scratches, battery health, accessories included..."
+                  value={form.description}
+                  onChange={handleChange}
+                  rows={6}
+                  className="w-full border border-gray-200 bg-white px-5 py-4 rounded-2xl outline-none focus:border-black transition resize-none"
+                />
+
+              </div>
+
+            </div>
+
+            {/* IMAGE */}
+            <div className="bg-gray-50 rounded-3xl p-5 sm:p-6">
+
+              <h2 className="text-2xl font-bold mb-6">
+                Device Images
+              </h2>
+
+              <div className="border-2 border-dashed border-gray-300 rounded-3xl p-6 bg-white">
+
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={uploadImage}
+                  className="w-full text-sm"
+                />
+
+                {imageUploading && (
+
+                  <div className="mt-5 bg-blue-50 text-blue-700 px-4 py-3 rounded-2xl font-medium">
+                    Uploading image...
+                  </div>
+
+                )}
+
+                {form.image_url && (
+
+                  <div className="mt-6">
+
+                    <img
+                      src={form.image_url}
+                      alt="Preview"
+                      className="w-full h-[250px] sm:h-[350px] object-cover rounded-3xl"
+                    />
+
+                  </div>
+
+                )}
+
+              </div>
+
+            </div>
+
+            {/* BUTTON */}
+            <button
+              type="submit"
+              disabled={loading || imageUploading}
+              className="w-full bg-black text-white py-5 rounded-2xl text-base sm:text-lg font-semibold hover:bg-gray-800 transition disabled:opacity-50"
+            >
+
+              {loading
+                ? 'Submitting Request...'
+                : 'Submit Trade-In Request'}
+
+            </button>
+
+          </form>
+
+        </div>
 
       </div>
 

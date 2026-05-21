@@ -134,7 +134,7 @@ export default function ProductPage() {
 
         <div className="bg-white px-10 py-8 rounded-3xl shadow-sm">
 
-          <h2 className="text-2xl font-bold">
+          <h2 className="text-2xl font-bold text-black">
             Loading...
           </h2>
 
@@ -146,28 +146,27 @@ export default function ProductPage() {
   }
 
   return (
+
     <main className="min-h-screen bg-gray-100 px-4 sm:px-6 lg:px-10 py-6 lg:py-10 overflow-x-hidden">
 
       <div className="max-w-7xl mx-auto">
 
-        {/* TOP SECTION */}
         <div className="bg-white rounded-3xl p-4 sm:p-6 lg:p-10 grid lg:grid-cols-2 gap-8 lg:gap-12 shadow-sm">
 
           {/* IMAGE */}
           <div>
 
-            <div className="relative overflow-hidden rounded-3xl">
+            <div className="relative overflow-hidden rounded-3xl bg-gray-100">
 
               <img
                 src={product.image_url}
                 alt={product.name}
-                className="w-full h-[320px] sm:h-[450px] lg:h-[600px] object-cover hover:scale-105 transition duration-500"
+                className="w-full h-[320px] sm:h-[450px] lg:h-[600px] object-cover"
               />
 
-              {/* WISHLIST */}
               <button
                 onClick={toggleWishlist}
-                className="absolute top-4 right-4 bg-white p-3 rounded-full shadow-lg hover:scale-110 transition"
+                className="absolute top-4 right-4 bg-white text-black p-3 rounded-full shadow-lg hover:scale-110 transition"
               >
 
                 <Heart
@@ -183,7 +182,6 @@ export default function ProductPage() {
 
             </div>
 
-            {/* BADGES */}
             <div className="flex flex-wrap gap-3 mt-5">
 
               {product.dealer_verified && (
@@ -215,18 +213,17 @@ export default function ProductPage() {
           </div>
 
           {/* DETAILS */}
-          <div>
+          <div className="text-black">
 
-            {/* TITLE */}
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
 
               <div>
 
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight break-words">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight break-words text-black">
                   {product.name}
                 </h1>
 
-                <p className="text-gray-500 mt-3 text-base sm:text-lg">
+                <p className="text-gray-600 mt-3 text-base sm:text-lg">
                   Premium verified marketplace listing
                 </p>
 
@@ -249,7 +246,7 @@ export default function ProductPage() {
                 Price
               </p>
 
-              <h2 className="text-4xl sm:text-5xl font-bold mt-2 break-words">
+              <h2 className="text-4xl sm:text-5xl font-bold mt-2 break-words text-black">
                 KES {product.price}
               </h2>
 
@@ -258,60 +255,36 @@ export default function ProductPage() {
             {/* SPECS */}
             <div className="grid grid-cols-2 gap-4 mt-8">
 
-              <div className="bg-gray-50 p-4 sm:p-5 rounded-2xl">
+              {[
+                ['Storage', product.storage],
+                ['RAM', product.ram],
+                ['Condition', product.condition],
+                ['Battery Health', product.battery_health || 'N/A']
+              ].map(([label, value]) => (
 
-                <p className="text-gray-500 text-sm">
-                  Storage
-                </p>
+                <div
+                  key={label}
+                  className="bg-gray-50 border border-gray-200 p-4 sm:p-5 rounded-2xl"
+                >
 
-                <h3 className="text-lg sm:text-xl font-bold mt-2">
-                  {product.storage}
-                </h3>
+                  <p className="text-gray-500 text-sm">
+                    {label}
+                  </p>
 
-              </div>
+                  <h3 className="text-lg sm:text-xl font-bold mt-2 text-black capitalize">
+                    {value}
+                  </h3>
 
-              <div className="bg-gray-50 p-4 sm:p-5 rounded-2xl">
+                </div>
 
-                <p className="text-gray-500 text-sm">
-                  RAM
-                </p>
-
-                <h3 className="text-lg sm:text-xl font-bold mt-2">
-                  {product.ram}
-                </h3>
-
-              </div>
-
-              <div className="bg-gray-50 p-4 sm:p-5 rounded-2xl">
-
-                <p className="text-gray-500 text-sm">
-                  Condition
-                </p>
-
-                <h3 className="text-lg sm:text-xl font-bold mt-2 capitalize">
-                  {product.condition}
-                </h3>
-
-              </div>
-
-              <div className="bg-gray-50 p-4 sm:p-5 rounded-2xl">
-
-                <p className="text-gray-500 text-sm">
-                  Battery Health
-                </p>
-
-                <h3 className="text-lg sm:text-xl font-bold mt-2">
-                  {product.battery_health || 'N/A'}
-                </h3>
-
-              </div>
+              ))}
 
             </div>
 
             {/* DESCRIPTION */}
             <div className="mt-10">
 
-              <h2 className="text-2xl font-bold mb-4">
+              <h2 className="text-2xl font-bold mb-4 text-black">
                 Device Description
               </h2>
 
@@ -322,7 +295,7 @@ export default function ProductPage() {
             </div>
 
             {/* DEALER */}
-            <div className="bg-gray-50 rounded-3xl p-5 sm:p-6 mt-10">
+            <div className="bg-gray-50 border border-gray-200 rounded-3xl p-5 sm:p-6 mt-10">
 
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
 
@@ -332,7 +305,7 @@ export default function ProductPage() {
                     Sold by
                   </p>
 
-                  <h2 className="text-2xl font-bold mt-1 break-words">
+                  <h2 className="text-2xl font-bold mt-1 break-words text-black">
                     {product.seller_name || 'Tech Dealer'}
                   </h2>
 
@@ -356,25 +329,25 @@ export default function ProductPage() {
 
               <div className="grid sm:grid-cols-2 gap-4 mt-6">
 
-                <div className="bg-white p-5 rounded-2xl">
+                <div className="bg-white border border-gray-200 p-5 rounded-2xl">
 
                   <p className="text-gray-500 text-sm">
                     Phone Number
                   </p>
 
-                  <h3 className="text-base sm:text-lg font-bold mt-2 break-words">
+                  <h3 className="text-base sm:text-lg font-bold mt-2 break-words text-black">
                     {product.seller_phone || 'Not Provided'}
                   </h3>
 
                 </div>
 
-                <div className="bg-white p-5 rounded-2xl">
+                <div className="bg-white border border-gray-200 p-5 rounded-2xl">
 
                   <p className="text-gray-500 text-sm">
                     Shop Location
                   </p>
 
-                  <h3 className="text-base sm:text-lg font-bold mt-2 break-words">
+                  <h3 className="text-base sm:text-lg font-bold mt-2 break-words text-black">
                     {product.seller_location || 'Nairobi, Kenya'}
                   </h3>
 
@@ -407,7 +380,7 @@ export default function ProductPage() {
 
               <button
                 onClick={addToCart}
-                className="border border-black py-4 rounded-2xl text-base sm:text-lg hover:bg-black hover:text-white transition font-semibold"
+                className="border-2 border-black bg-white text-black py-4 rounded-2xl text-base sm:text-lg hover:bg-black hover:text-white transition font-semibold"
               >
 
                 Add To Cart
@@ -416,13 +389,12 @@ export default function ProductPage() {
 
             </div>
 
-            {/* WISHLIST */}
             <button
               onClick={toggleWishlist}
               className={`w-full py-4 rounded-2xl text-base sm:text-lg mt-4 transition font-semibold ${
                 wishlisted
                   ? 'bg-red-500 text-white'
-                  : 'bg-white border border-black hover:bg-black hover:text-white'
+                  : 'bg-white border-2 border-black text-black hover:bg-black hover:text-white'
               }`}
             >
 
@@ -433,9 +405,9 @@ export default function ProductPage() {
             </button>
 
             {/* BUYER PROTECTION */}
-            <div className="bg-gray-50 rounded-2xl p-5 sm:p-6 mt-10">
+            <div className="bg-gray-50 border border-gray-200 rounded-2xl p-5 sm:p-6 mt-10">
 
-              <h3 className="text-2xl font-bold">
+              <h3 className="text-2xl font-bold text-black">
                 Buyer Protection
               </h3>
 
@@ -468,5 +440,6 @@ export default function ProductPage() {
       </div>
 
     </main>
+
   )
 }

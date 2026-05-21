@@ -53,7 +53,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
 
         {/* TOP NAV */}
-        <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center justify-between gap-2">
 
           {/* LOGO */}
           <Link href="/">
@@ -99,11 +99,11 @@ export default function Navbar() {
             {/* TRADE IN */}
             <Link href="/trade-in">
 
-              <button className="flex items-center gap-2 border border-gray-300 px-3 sm:px-4 py-3 rounded-2xl hover:bg-gray-100 transition font-semibold whitespace-nowrap text-sm sm:text-base text-black bg-white">
+              <button className="flex items-center gap-1 border border-gray-300 px-3 sm:px-4 py-3 rounded-2xl hover:bg-gray-100 transition font-semibold whitespace-nowrap text-xs sm:text-base text-black bg-white">
 
-                <Repeat size={17} />
+                <Repeat size={16} />
 
-                <span className="hidden sm:inline">
+                <span>
                   Trade-In
                 </span>
 
@@ -114,7 +114,7 @@ export default function Navbar() {
             {/* DEALER LOGIN */}
             <Link href="/auth">
 
-              <button className="bg-black text-white px-4 sm:px-5 py-3 rounded-2xl hover:bg-gray-800 transition font-semibold text-sm sm:text-base whitespace-nowrap">
+              <button className="bg-black text-white px-4 sm:px-5 py-3 rounded-2xl hover:bg-gray-800 transition font-semibold text-xs sm:text-base whitespace-nowrap">
                 Dealer Login
               </button>
 
